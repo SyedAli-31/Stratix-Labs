@@ -1,12 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Check } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
 import { services } from '@/lib/data';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 type ServiceType = {
   id: string;
@@ -20,7 +17,7 @@ const WebDevelopment = () => {
   const [contentRef] = useScrollAnimation<HTMLDivElement>();
 
   useEffect(() => {
-    const found = services.find(s => s.title === 'Web Development');
+    const found = services.find((s) => s.title === 'Web Development');
     if (found) {
       const convertedService: ServiceType = {
         id: String(found.id), // Convert number to string safely
@@ -39,8 +36,6 @@ const WebDevelopment = () => {
       </div>
     );
   }
-
-  // --- Rest of your code remains the same (no errors, no 'any') ---
 
   const benefits = [
     "Fully responsive websites designed to engage users",
@@ -78,26 +73,38 @@ const WebDevelopment = () => {
     }
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };
-
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-gray-950">
-      {/* rest of your JSX exactly as it was, no changes needed */}
+    <div
+      className="pt-24 pb-20 min-h-screen bg-gray-950"
+      ref={contentRef}
+    >
+      <div className="container mx-auto px-4">
+        <h1 className="text-4xl font-semibold text-white mb-8">{service.title}</h1>
+        <p className="text-lg text-white mb-12">{service.description}</p>
+
+        <section className="mb-12">
+          <h2 className="text-3xl font-semibold text-white mb-6">Benefits</h2>
+          <ul className="space-y-4">
+            {benefits.map((benefit, index) => (
+              <li key={index} className="text-lg text-white">
+                {benefit}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section>
+          <h2 className="text-3xl font-semibold text-white mb-6">Our Process</h2>
+          <div className="space-y-8">
+            {process.map((step) => (
+              <div key={step.step} className="space-y-2">
+                <h3 className="text-xl font-semibold text-white">{step.title}</h3>
+                <p className="text-lg text-white">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
     </div>
   );
 };
