@@ -6,6 +6,9 @@ import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import CookieConsent from "@/components/ui/CookieConsent";
 import BackToTop from "@/components/ui/BackToTop";
+import { Toaster } from "@/components/ui/toaster"
+
+ 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       ><Header/>
         {children}
+        <Toaster/>
         <Footer/>
         <FloatingWhatsApp phoneNumber="+923475933141" />
         <CookieConsent/>
