@@ -1,10 +1,14 @@
-"use client"
+"use client";
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
-import Image from "next/image";
+import { Menu, X, Mail, Phone } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+
 interface NavLink {
   name: string;
   href: string;
@@ -14,13 +18,12 @@ const navLinks: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
- 
   { name: "Contact", href: "/contact" },
 ];
 
 const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,9 +31,7 @@ const Header: React.FC = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLinkClick = () => {
@@ -39,60 +40,75 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/80 backdrop-blur-md shadow-lg" : "bg-transparent"
-      }`}
+      className={cn(
+        "sticky top-0 z-50 w-full transition-all duration-300",
+        isScrolled
+          ? "bg-white/5 backdrop-blur-md border-b border-black shadow-md"
+          : "bg-white border-b border-black shadow-md"
+      )}
     >
-      <nav className="container mx-auto px-4 md:px-8 py-4">
-        <div className="flex items-center justify-between">
+      <div className="container mx-auto px-3">
+        {/* Top Contact Bar */}
+        <div className="flex items-center justify-between h-6 border-b text-sm border-black text-black transition-all duration-300">
+          <div className="flex items-center gap-4 ml-4">
+            <div className="flex items-center font-bold gap-2">
+              <Mail className="w-4 h-4" />
+              <span>contact@stratixlabs.com</span>
+            </div>
+            <div className="flex items-center ml-2 font-bold gap-2">
+              <Phone className="w-4 h-4" />
+              <span>+1 (555) 123-4567</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Nav */}
+        <div className="flex items-center justify-between py-3 ml-4">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-          <Image
-          src="/logo.png"
-          alt="Stratix Labs Logo"
-          width={60}
-          height={60}
-          className="w-14 h-14 object-contain"
-        />
-           <span className="font-bold text-[36px] bg-clip-text text-transparent bg-gradient-to-r from-[#1D2B88] via-[#6B7BF9] to-white">
+            <Image
+              src="/op.png"
+              alt="Stratix Labs Logo"
+              width={40}
+              height={40}
+              className="w-10 h-10 object-contain"
+            />
+            <span className="font-sans font-semibold text-[26px] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#1D2B88] to-[#4a5ef1]">
   Stratix Labs
 </span>
 
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-2">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-gray-200 hover:text-purple-600  transition-colors"
-              >
-                {link.name}
+              <Link key={link.name} href={link.href} className="group relative">
+                <span className="inline-block px-3 py-2 text-sm font-medium text-black transition-all duration-300 bg-white group-hover:bg-blue-600 group-hover:text-white rounded-md">
+                  {link.name}
+                </span>
               </Link>
             ))}
-            <Link href="/contact">
-              <Button
-                variant="default"
-                size="sm"
-                className="bg-purple-600  hover:bg-purple-800  text-white"
-              >
-                Get Started
-              </Button>
+            <Link
+              href="/contact"
+              passHref
+              className="inline-block px-4 py-2 bg-blue-600 hover:bg-purple-800 text-white font-medium rounded-md transition-colors duration-300"
+            >
+              Get Started
             </Link>
+
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-200 hover:text-purple-600 "
+          <Button
+            variant="ghost"
+            className="md:hidden text-black inline-block px-3  bg-blue-600 hover:bg-blue-800 "
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -100,7 +116,7 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden mt-4 bg-black/95 rounded-lg shadow-xl overflow-hidden"
+              className="md:hidden mt-2 bg-black/95 rounded-lg shadow-xl overflow-hidden"
             >
               <div className="flex flex-col py-4">
                 {navLinks.map((link) => (
@@ -108,7 +124,7 @@ const Header: React.FC = () => {
                     key={link.name}
                     href={link.href}
                     onClick={handleLinkClick}
-                    className="px-6 py-3 text-gray-200 hover:text-purple-800  hover:bg-gray-900 transition-colors block"
+                    className="px-6 py-3 text-gray-200 hover:text-purple-800 hover:bg-gray-900 transition-colors block"
                   >
                     {link.name}
                   </Link>
@@ -116,8 +132,7 @@ const Header: React.FC = () => {
                 <div className="px-6 pt-4">
                   <Link href="/contact">
                     <Button
-                      variant="default"
-                      className="w-full bg-purple-600  hover:bg-purple-800  text-white"
+                      className="w-full bg-purple-600 hover:bg-purple-800 text-white"
                       onClick={handleLinkClick}
                     >
                       Get Started
@@ -128,7 +143,7 @@ const Header: React.FC = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </nav>
+      </div>
     </header>
   );
 };

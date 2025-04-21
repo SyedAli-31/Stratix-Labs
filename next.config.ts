@@ -1,3 +1,4 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
     ignoreBuildErrors: true, // Ignore TypeScript errors
@@ -6,8 +7,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'stratix-labs.vercel.app',  // Your domain name
-        pathname: '/**',                      // Allow images from any path under the domain
+        hostname: 'stratix-labs.vercel.app',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com', // ✅ Allow Unsplash images
+        pathname: '/**',
       },
     ],
   },

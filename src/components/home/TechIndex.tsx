@@ -60,7 +60,7 @@ export default function TechIndex() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-16 items-center ml-2 mr-2">
           {/* Skills Section */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}

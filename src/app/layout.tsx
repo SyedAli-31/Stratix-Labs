@@ -8,6 +8,7 @@ import CookieConsent from "@/components/ui/CookieConsent";
 import BackToTop from "@/components/ui/BackToTop";
 import { Toaster } from "@/components/ui/toaster"
 
+
  
 const geistSans = Geist({
   variable: "--font-geist-sans",

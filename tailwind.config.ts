@@ -65,6 +65,9 @@ const config: Config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
+    fontFamily: {
+      sans: ["InterVariable", "sans-serif"],
+    },
   },
   plugins: [require("tailwindcss-animate")],
 };
