@@ -26,7 +26,7 @@ const Footer = () => {
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [year, setYear] = useState<number | null>(null); // for hydration fix
+  const [year, setYear] = useState<number | null>(null);
 
   useEffect(() => {
     setYear(new Date().getFullYear());
@@ -59,6 +59,7 @@ const Footer = () => {
         toast.error("Subscription failed. Please try again.");
       }
     } catch (error) {
+      console.error("Subscription error:", error);
       toast.error("An error occurred. Please try again.");
     }
 
@@ -73,7 +74,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <div className="flex items-center space-x-2   ml-10">
+              <div className="flex items-center space-x-2 ml-10">
                 <Image
                   src="/logo.png"
                   alt="Stratix Labs Logo"
@@ -81,7 +82,6 @@ const Footer = () => {
                   height={96}
                   className="w-20 h-24 object-contain"
                 />
-               
               </div>
               <p className="text-gray-400 mb-4">
                 Transforming brands through innovative marketing strategies and
