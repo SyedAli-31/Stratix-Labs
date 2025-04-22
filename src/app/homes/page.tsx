@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+
 import DuctCleaningSection from "@/components/home/duct-cleaning-services";
 
 export default function Home() {
