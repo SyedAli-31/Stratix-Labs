@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-
+import Home from './homes/page';
 // import TrustBadges from "@/components/home/Trustbadges";
 import ContactSection from "@/components/home/ContactSection";
 import Hero from "@/components/home/Hero";
@@ -10,7 +10,7 @@ import SecRecent from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
 import TechIndex from "@/components/home/TechIndex";
 import Testimonials from "@/components/home/Testimonials";
-import WhatWeDo from "@/components/home/WhatWeDo";
+ 
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 const Page = () => {
@@ -23,7 +23,7 @@ const Page = () => {
       if (anchorElement) {
         e.preventDefault();
         const targetId = anchorElement.getAttribute('href');
-        if (targetId === '#') return;
+        if (targetId === '/') return;
 
         const targetElement = document.querySelector(targetId as string);
         if (targetElement) {
@@ -58,8 +58,9 @@ const Page = () => {
         {/* <TrustBadges /> */}
         <WhyChooseUs />
         <SecRecent />
-        <WhatWeDo />
+        <Home/>
         <TechIndex />
+        
         <Statistics />
         <Testimonials />
         <ContactSection />

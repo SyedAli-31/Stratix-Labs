@@ -55,10 +55,11 @@ const Header: React.FC = () => {
               <Mail className="w-4 h-4" />
               <span>contact@stratixlabs.com</span>
             </div>
-            <div className="flex items-center ml-2 font-bold gap-2">
-              <Phone className="w-4 h-4" />
-              <span>+1 (555) 123-4567</span>
-            </div>
+            <div className="flex items-center ml-1 font-bold gap-2 whitespace-nowrap text-sm sm:text-base md:text-[16px]">
+  <Phone className="w-4 h-4 shrink-0" />
+  <span className="truncate max-w-[140px] sm:max-w-none">+1 (555) 123-4567</span>
+</div>
+
           </div>
         </div>
 
