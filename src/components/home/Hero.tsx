@@ -27,7 +27,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          className="mt-6 text-white   sm:text-lg text-muted-foreground leading-relaxed"
+          className="mt-6 text-white   sm:text-lg  leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
