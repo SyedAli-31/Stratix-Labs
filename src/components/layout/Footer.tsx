@@ -88,18 +88,30 @@ const Footer = () => {
                 premium creative solutions.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
-                  <Twitter size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
-                  <Facebook size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
-                  <Linkedin size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
-                  <Instagram size={20} />
-                </a>
+              <Link href="/" className="text-gray-400 hover:text-gold transition-colors">
+  <Twitter size={20} />
+</Link>
+<Link
+  href="https://www.facebook.com/profile.php?id=61575081911392&mibextid=ZbWKwL"
+  className="text-gray-400 hover:text-gold transition-colors"
+  target="_blank"
+>
+  <Facebook size={20} />
+</Link>
+<Link
+  href="https://www.linkedin.com/company/106972398/admin/dashboard/"
+  className="text-gray-400 hover:text-gold transition-colors"
+  target="_blank"
+>
+  <Linkedin size={20} />
+</Link>
+<Link
+  href="https://www.instagram.com/stratixlabs_27/"
+  className="text-gray-400 hover:text-gold transition-colors"
+  target="_blank"
+>
+  <Instagram size={20} />
+</Link>
               </div>
             </div>
 

@@ -21,7 +21,7 @@ export default function Home() {
               Breathe <span className="text-white">Better</span> Air
             </h1>
             <p className="text-lg md:text-xl text-slate-300 max-w-[700px] mx-auto">
-              Professional HVAC solutions for your home and business
+              Professional cleaning solutions for your home and business
             </p>
           </motion.div>
         </div>
@@ -35,83 +35,95 @@ export default function Home() {
   <div className="container mx-auto max-w-6xl">
     <div className="text-center mb-14">
       <h2 className="text-4xl font-bold text-primary tracking-tight">Our Services</h2>
-      <p className="text-muted-foreground mt-3 text-lg">Explore our range of professional HVAC solutions</p>
+      <p className="text-muted-foreground mt-3 text-lg">
+        Explore our range of professional cleaning solutions
+      </p>
     </div>
 
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {/* Card Template */}
       {[
         {
-          title: "HVAC Installation",
-          desc: "Professional installation of heating, ventilation, and air conditioning systems.",
-          link: "/",
-          icon: (
-            <path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z" />
-          ),
-          highlight: false,
+          title: "Home Cleaning",
+          desc: "Thorough residential cleaning for a healthier, fresher living space.",
+          link: "/home-cleaning",
+          icon: <path d="M3 9.5L12 4l9 5.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5Z" />,
+        },
+        {
+          title: "Carpet Cleaning",
+          desc: "Remove deep stains, dirt, and allergens with our expert carpet services.",
+          link: "/carpet-cleaning",
+          icon: <path d="M4 6h16M4 10h16M4 14h16M4 18h16" />,
         },
         {
           title: "Duct Cleaning",
-          desc: "Comprehensive cleaning of air ducts to improve indoor air quality.",
+          desc: "Improve indoor air quality with complete duct and vent cleaning.",
           link: "/duct-cleaning",
-          icon: (
-            <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
-          ),
-          highlight: false,
+          icon: <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2" />,
         },
         {
-          title: "HVAC Maintenance",
-          desc: "Regular maintenance to keep your HVAC system running efficiently.",
-          link: "#",
+          title: "Car Detailing",
+          desc: "Premium interior and exterior car cleaning for a showroom finish.",
+          link: "/car-detailing",
+          icon: <path d="M3 13h18l-1.5-5h-15L3 13Zm0 0v5a2 2 0 0 0 2 2h2v-3h10v3h2a2 2 0 0 0 2-2v-5" />,
+        },
+        {
+          title: "Sanitization",
+          desc: "Professional-grade disinfection services for homes and offices.",
+          link: "/sanitization",
           icon: (
             <>
-              <path d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-              <path d="M6.5 12H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2.5" />
-              <path d="M8 18c0-2.2 1.8-4 4-4s4 1.8 4 4" />
-              <path d="M18 18h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h2" />
+              <path d="M12 2v20" />
+              <path d="M5 8h14" />
+              <path d="M5 16h14" />
             </>
           ),
-          highlight: false,
+        },
+        {
+          title: "Deep Cleaning",
+          desc: "Intensive cleaning that targets hidden dirt and bacteria in every corner.",
+          link: "/deep-cleaning",
+          icon: (
+            <>
+              <path d="M3 3h18v18H3V3z" />
+              <path d="M9 9h6v6H9z" />
+            </>
+          ),
         },
       ].map((service, i) => (
         <motion.div
           key={i}
           whileHover={{ scale: 1.04 }}
           transition={{ duration: 0.35 }}
-          className={`relative group p-6 rounded-3xl border shadow-[0_0_0_rgba(0,0,0,0)] transition-all duration-300 hover:shadow-indigo-500/20 ${
-            service.highlight
-              ? "bg-[hsl(var(--duct-container))] border-2 border-[hsl(var(--duct-primary))]"
-              : "bg-gradient-to-br from-[#10121d] via-[#0b0d19] to-[#0a0a16] border-gray-700"
-          }`}
+          className="relative group p-6 rounded-3xl border shadow-[0_0_0_rgba(0,0,0,0)] transition-all duration-300 hover:shadow-purple-500/20 bg-gradient-to-br from-[#10121d] via-[#0b0d19] to-[#0a0a16] border-gray-700"
         >
-          {service.highlight && (
-            <div className="absolute top-0 right-0 bg-[hsl(var(--duct-primary))] text-black px-3 py-1 text-xs font-bold rounded-bl-xl shadow-md z-10">
-              Popular
-            </div>
-          )}
-
           <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-5 group-hover:rotate-6 transition-transform">
-            <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <svg
+              className="w-6 h-6 text-primary"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
               {service.icon}
             </svg>
           </div>
 
-          <h3
-            className={`text-2xl font-semibold mb-2 transition-colors group-hover:text-primary ${
-              service.highlight ? "text-[hsl(var(--duct-light))]" : "text-white"
-            }`}
-          >
+          <h3 className="text-2xl font-semibold mb-2 transition-colors group-hover:text-primary text-white">
             {service.title}
           </h3>
 
           <p className="text-gray-400 mb-5 leading-relaxed">{service.desc}</p>
 
           <Link href={service.link}>
-            <span className={`inline-flex items-center text-sm font-medium hover:underline transition-colors ${
-              service.highlight ? "text-[hsl(var(--duct-primary))]" : "text-primary"
-            }`}>
+            <span className="inline-flex items-center text-sm font-medium hover:underline transition-colors text-primary">
               Learn more
-              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg
+                className="w-4 h-4 ml-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
                 <path d="M5 12h14" />
                 <path d="m12 5 7 7-7 7" />
               </svg>
@@ -122,6 +134,7 @@ export default function Home() {
     </div>
   </div>
 </section>
+
 
     </main>
   );

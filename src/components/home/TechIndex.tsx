@@ -6,12 +6,13 @@ import Image from "next/image";
 
 
 const skills = [
-  { name: "Mobile Development", percentage: 87 },
-  { name: "Web Development", percentage: 90 },
-  { name: "Software Development", percentage: 90 },
-  { name: "Graphic Design", percentage: 95 },
-  { name: "2D & 3D Animation", percentage: 87 },
-  { name: "SEO", percentage: 83 },
+  { name: "UI/UX Design", percentage: 87 },
+  { name: "App & Web Development", percentage: 95 },
+  { name: "Logo Design", percentage: 90 },
+  { name: "Graphic Design", percentage: 98 },
+  { name: "Video Editing", percentage: 93 },
+  { name: "Social Media Ads", percentage: 83 },
+  { name: "2D/3D Animation ", percentage: 80 },
 ];
 
 const philosophies = [

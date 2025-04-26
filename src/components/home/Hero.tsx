@@ -49,10 +49,15 @@ const Hero = () => {
             Explore Services
           </Link>
           <Link
-            href="/contact"
-            className="inline-block px-6 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-background transition-all duration-300"
-          >
-            Let&apos;s Talk
+           
+           href="https://wa.me/923282355331?text=Hello!%20I'd%20like%20to%20know%20more%20about%20your%20services."
+           target="_blank"
+           rel="noopener noreferrer"
+           className="inline-block px-6 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-background transition-all duration-300"
+         >
+           Let&apos;s Talk
+         
+         
           </Link>
         </motion.div>
       </div>

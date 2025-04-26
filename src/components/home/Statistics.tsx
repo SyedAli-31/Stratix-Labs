@@ -4,9 +4,9 @@ import { motion, useMotionValue, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const stats = [
-  { number: 1500, label: 'Projects Done' },
-  { number: 2000, label: 'Happy Customers' },
-  { number: 28, label: 'Experienced Staff' },
+  { number: 450, label: 'Projects Done' },
+  { number: 1500, label: 'Happy Customers' },
+  { number: 50, label: 'Experienced Staff' },
   { number: 15, label: 'Countries Worldwide' },
 ];
 

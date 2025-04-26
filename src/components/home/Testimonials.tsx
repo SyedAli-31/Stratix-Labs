@@ -47,10 +47,10 @@ const testimonials = [
 
 // Stats data
 const stats = [
-  { id: 1, value: 250, label: "Global Clients", suffix: "+" },
-  { id: 2, value: 93, label: "Success Rate", suffix: "%" },
-  { id: 3, value: 15, label: "Industry Awards", suffix: "+" },
-  { id: 4, value: 12, label: "Years of Experience", suffix: "" }
+  { id: 1, value: 150, label: "Global Clients", suffix: "+" },
+  { id: 2, value: 95, label: "Success Rate", suffix: "%" },
+  { id: 3, value: 120, label: "Satisfied Clients", suffix: "+" },
+  { id: 4, value: 10, label: "Years of Experience", suffix: "" }
 ];
 
 const Testimonials = () => {

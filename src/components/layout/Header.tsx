@@ -18,7 +18,7 @@ const navLinks: NavLink[] = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Contact", href: "/contact" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
 ];
 
 const Header: React.FC = () => {
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
               passHref
               className="inline-block px-4 py-2 bg-blue-600 hover:bg-purple-800 text-white font-medium rounded-md transition-colors duration-300"
             >
-              Get Started
+              Contact Us
             </Link>
 
           </div>
