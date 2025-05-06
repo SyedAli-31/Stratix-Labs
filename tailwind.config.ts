@@ -10,39 +10,39 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#6D28D9", // Purple
-        secondary: "#0f172a", // Dark blue
-        background: "#0B1120", // Dark background
-        foreground: "#FFFFFF", // Light text on dark
+        primary: "#7C3AED", // Brighter purple
+        secondary: "#1E293B", // Slate dark blue (less harsh than #0f172a)
+        background: "#111827", // Dark but slightly softer than pure black
+        foreground: "#F9FAFB", // Very light text for high contrast
         card: {
-          DEFAULT: "#1E293B", // Slate-like card
-          foreground: "#F8FAFC", // Text on card
+          DEFAULT: "#1F2937", // Darker slate
+          foreground: "#F1F5F9", // Soft white
         },
         popover: {
-          DEFAULT: "#1E1B4B",
+          DEFAULT: "#312E81", // Indigo tone
           foreground: "#E0E7FF",
         },
         muted: {
-          DEFAULT: "#334155",
-          foreground: "#CBD5E1",
+          DEFAULT: "#374151", // Cool gray
+          foreground: "#D1D5DB",
         },
         accent: {
-          DEFAULT: "#4C1D95",
-          foreground: "#F3E8FF",
+          DEFAULT: "#6366F1", // Indigo
+          foreground: "#E0E7FF",
         },
         destructive: {
-          DEFAULT: "#7F1D1D",
+          DEFAULT: "#DC2626", // Brighter red
           foreground: "#FEE2E2",
         },
-        border: "#1E293B",
+        border: "#334155", // Lighter border for visibility
         input: "#1E293B",
-        ring: "#6D28D9",
+        ring: "#7C3AED", // Match updated primary
         chart: {
-          1: "#6D28D9",
-          2: "#9333EA",
-          3: "#7C3AED",
-          4: "#8B5CF6",
-          5: "#A78BFA",
+          1: "#7C3AED",
+          2: "#8B5CF6",
+          3: "#A78BFA",
+          4: "#C4B5FD",
+          5: "#DDD6FE",
         },
       },
       borderRadius: {

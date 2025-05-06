@@ -98,21 +98,47 @@ const Services = () => {
   }
 
   return (
-    <section id="services" className="relative py-20 overflow-hidden" ref={ref}>
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-black to-gray-900 opacity-95 z-0"></div>
+    <div id="services" className="relative py-10 overflow-hidden" ref={ref}>
+<div className="absolute inset-0 z-0 overflow-hidden">
+  {/* Stormy Clouds Layer */}
+  <div className="absolute inset-0 z-0 overflow-hidden">
+  {/* Static Stormy Cloud Background */}
+  <div
+    className="absolute inset-0 bg-no-repeat bg-cover opacity-90"
+    style={{
+      backgroundImage: `url('https://www.transparenttextures.com/patterns/cloudy-day.png')`, // lightweight cloudy texture
+      backgroundColor: "#1E293B", // dark base
+    }}
+  />
 
-      {/* Animated Pattern */}
-      <motion.div
-        className="absolute inset-0 opacity-10 z-0"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: "100% 100%" }}
-        transition={{ duration: 30, repeat: Infinity, repeatType: "reverse" }}
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: "30px 30px",
-        }}
-      />
+  {/* Occasional Lightning Flicker - only once on mount */}
+  <motion.div
+    className="absolute inset-0 bg-white pointer-events-none"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: [0, 0.08, 0] }}
+    transition={{
+      duration: 1,
+      ease: "easeInOut",
+      delay: 2,
+    }}
+    style={{ mixBlendMode: "screen" }}
+  />
+
+  {/* Ocean Wave Layer */}
+  <motion.div
+    className="absolute inset-0 opacity-50"
+    initial={{ backgroundPosition: "0% 100%" }}
+    animate={{ backgroundPosition: "100% 100%" }}
+    transition={{ duration: 30, repeat: Infinity, repeatType: "mirror" }}
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%2300f0ff' fill-opacity='0.3' d='M0,192L60,197.3C120,203,240,213,360,202.7C480,192,600,160,720,160C840,160,960,192,1080,197.3C1200,203,1320,181,1380,170.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z'/%3E%3C/svg%3E")`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+    }}
+  />
+</div>
+
+</div>
 
       {/* Content */}
       <div className="relative container mx-auto px-4 md:px-8 z-10">
@@ -158,8 +184,112 @@ const Services = () => {
           subheading="Schedule a consultation with our experts to discuss how our services can be tailored to your specific needs."
           buttonText="Book a Free Strategy Call"
         />
+         {/* Services Section */}
+         <section className="py-1 px-4 mb-10 " id="other-services">
+     <div className="container mx-auto max-w-6xl">
+       <div className="text-center mb-14">
+         <h2 className="text-4xl font-bold text-yellow-500 tracking-tight">Other Related Services</h2>
+         <p className="text-muted-foreground mt-3 text-lg">
+           Explore our range of professional cleaning solutions
+         </p>
+       </div>
+   
+       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+         {[
+           {
+             title: "Home Cleaning",
+             desc: "Thorough residential cleaning for a healthier, fresher living space.",
+             link: "/home-cleaning",
+             icon: <path d="M3 9.5L12 4l9 5.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5Z" />,
+           },
+           {
+             title: "Carpet Cleaning",
+             desc: "Remove deep stains, dirt, and allergens with our expert carpet services.",
+             link: "/carpet-cleaning",
+             icon: <path d="M4 6h16M4 10h16M4 14h16M4 18h16" />,
+           },
+           {
+             title: "Duct Cleaning",
+             desc: "Improve indoor air quality with complete duct and vent cleaning.",
+             link: "/duct-cleaning",
+             icon: <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2" />,
+           },
+           {
+             title: "Car Detailing",
+             desc: "Premium interior and exterior car cleaning for a showroom finish.",
+             link: "/car-detailing",
+             icon: <path d="M3 13h18l-1.5-5h-15L3 13Zm0 0v5a2 2 0 0 0 2 2h2v-3h10v3h2a2 2 0 0 0 2-2v-5" />,
+           },
+           {
+             title: "Sanitization",
+             desc: "Professional-grade disinfection services for homes and offices.",
+             link: "/sanitization",
+             icon: (
+               <>
+                 <path d="M12 2v20" />
+                 <path d="M5 8h14" />
+                 <path d="M5 16h14" />
+               </>
+             ),
+           },
+           {
+             title: "Deep Cleaning",
+             desc: "Intensive cleaning that targets hidden dirt and bacteria in every corner.",
+             link: "/deep-cleaning",
+             icon: (
+               <>
+                 <path d="M3 3h18v18H3V3z" />
+                 <path d="M9 9h6v6H9z" />
+               </>
+             ),
+           },
+         ].map((service, i) => (
+           <motion.div
+             key={i}
+             whileHover={{ scale: 1.04 }}
+             transition={{ duration: 0.35 }}
+             className="relative group p-6 rounded-3xl border shadow-[0_0_0_rgba(0,0,0,0)] transition-all duration-300 hover:shadow-purple-500/20 bg-gradient-to-br from-[#10121d] via-[#0b0d19] to-[#0a0a16] border-gray-700"
+           >
+             <div className="w-14 h-14 bg-primary/20 rounded-full flex items-center justify-center mb-5 group-hover:rotate-6 transition-transform">
+               <svg
+                 className="w-6 h-6 text-primary"
+                 fill="none"
+                 stroke="currentColor"
+                 strokeWidth="2"
+                 viewBox="0 0 24 24"
+               >
+                 {service.icon}
+               </svg>
+             </div>
+   
+             <h3 className="text-2xl font-semibold mb-2 transition-colors group-hover:text-primary text-white">
+               {service.title}
+             </h3>
+   
+             <p className="text-gray-400 mb-5 leading-relaxed">{service.desc}</p>
+   
+             <Link href={service.link}>
+               <span className="inline-flex items-center text-sm font-medium hover:underline transition-colors text-primary">
+                 Learn more
+                 <svg
+                   className="w-4 h-4 ml-1"
+                   fill="none"
+                   stroke="currentColor"
+                   strokeWidth="2"
+                   viewBox="0 0 24 24"
+                 >
+                   <path d="M5 12h14" />
+                   <path d="m12 5 7 7-7 7" />
+                 </svg>
+               </span>
+             </Link>
+           </motion.div>
+         ))}
+       </div>
+     </div>
+     </section>
       </div>
-    </section>
+    </div>
   );
 };
 

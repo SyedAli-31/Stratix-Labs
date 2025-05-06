@@ -29,3 +29,9 @@
   animation: gradientMove 5s ease infinite;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+.clip-triangle {
+  clip-path: polygon(100% 0%, 100% 100%, 0% 100%);
+}

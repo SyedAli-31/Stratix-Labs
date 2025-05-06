@@ -23,7 +23,7 @@ export default function Statistics() {
           className="w-full h-full"
           animate={{
             background: [
-              'radial-gradient(circle at 20% 20%, #3700ff55, transparent 50%)',
+              'radial-gradient(circle at 20% 20%,  #2b6cb0; transparent 50%)',
               'radial-gradient(circle at 80% 30%, #6d00ff44, transparent 60%)',
               'radial-gradient(circle at 50% 80%, #2e00ff33, transparent 50%)',
             ],

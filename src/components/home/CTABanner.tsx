@@ -18,7 +18,7 @@ const CTABanner = ({
   buttonLink = "/contact"
 }: CTABannerProps) => {
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="py-8 relative overflow-hidden">
       
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
@@ -52,7 +52,7 @@ const CTABanner = ({
             <Link href={buttonLink} passHref>
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-6 text-lg shadow-lg"
+                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-2 text-lg shadow-lg"
               >
                 {buttonText}
               </Button>

@@ -27,7 +27,7 @@ const Hero = () => {
         </motion.h1>
 
         <motion.p
-          className="mt-6 text-white   sm:text-lg text-muted-foreground leading-relaxed"
+          className="mt-6    sm:text-lg text-muted-foreground leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
@@ -43,7 +43,7 @@ const Hero = () => {
           transition={{ duration: 1.4 }}
         >
           <Link
-            href="/services"
+            href="#other-services"
             className="inline-block px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-500 text-white font-semibold shadow-lg hover:scale-105 transition-transform duration-300"
           >
             Explore Services

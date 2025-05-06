@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import {  Mail, Phone} from "lucide-react";
 import {
   ArrowUp,
   Twitter,
@@ -26,11 +27,7 @@ const Footer = () => {
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [year, setYear] = useState<number | null>(null);
-
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+  const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear()); // hydration issue fix
 
   const handleSubscribe = async () => {
     if (!email) {
@@ -66,12 +63,18 @@ const Footer = () => {
     setLoading(false);
   };
 
+  // To ensure hydration consistency, update the year on client-side once mounted
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   return (
     <>
       <Toaster position="top-right" />
       <footer className="bg-black text-white py-12">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
             {/* Company Info */}
             <div>
               <div className="flex items-center space-x-2 ml-10">
@@ -88,18 +91,30 @@ const Footer = () => {
                 premium creative solutions.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                <Link href="/" className="text-gray-400 hover:text-gold transition-colors">
                   <Twitter size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                </Link>
+                <Link
+                  href="https://www.facebook.com/profile.php?id=61575081911392&mibextid=ZbWKwL"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
                   <Facebook size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/company/106972398/admin/dashboard/"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
                   <Linkedin size={20} />
-                </a>
-                <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                </Link>
+                <Link
+                  href="https://www.instagram.com/stratixlabs_27/"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
                   <Instagram size={20} />
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -116,9 +131,9 @@ const Footer = () => {
               </ul>
             </div>
 
-            {/* Services */}
+            {/* Other Services */}
             <div>
-              <h3 className="font-semibold text-lg mb-4">Our Services</h3>
+              <h3 className="font-semibold text-lg mb-4">IT Services</h3>
               <ul className="space-y-2">
                 <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Digital Marketing</Link></li>
                 <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Brand Strategy</Link></li>
@@ -164,7 +179,7 @@ const Footer = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {year ?? ""} Stratix Labs. All rights reserved.
+              &copy; {currentYear} Stratix Labs. All rights reserved.
             </p>
             <Button
               variant="outline"
@@ -175,6 +190,20 @@ const Footer = () => {
               <ArrowUp size={18} />
             </Button>
           </div>
+          {/* Top Contact Bar */}
+        <div className="flex items-center justify-center h-6 border-b text-sm border-black text-white transition-all duration-300">
+          <div className="flex items-center gap-4 ml-4">
+            <div className="flex items-center font-bold gap-2">
+              <Mail className="w-4 h-4" />
+              <span>contact@stratixlabs.com</span>
+            </div>
+            <div className="flex items-center ml-1 font-bold gap-2 whitespace-nowrap text-sm sm:text-base md:text-[16px]">
+              <Phone className="w-4 h-4 shrink-0" />
+              <span className="truncate max-w-[140px] sm:max-w-none">+1 (555) 123-4567</span>
+            </div>
+          </div>
+        </div>
+
         </div>
       </footer>
     </>

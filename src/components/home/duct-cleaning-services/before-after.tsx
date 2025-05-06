@@ -4,11 +4,11 @@ import { AspectRatio } from "@/components/ui/aspect-ratio";
 const BeforeAfter = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      {/* Before Image Section */}
+      {/* First Before Image */}
       <div className="relative rounded-lg overflow-hidden group">
         <AspectRatio ratio={3 / 2} className="bg-muted">
           <Image
-            src="https://images.unsplash.com/photo-1534398079543-7ae6d016b86a?auto=format&fit=crop&w=600&h=400&q=80"
+            src="/before.png"
             alt="Dirty air duct before cleaning"
             fill
             className="object-cover"
@@ -21,12 +21,46 @@ const BeforeAfter = () => {
         </div>
       </div>
 
-      {/* After Image Section */}
+      {/* First After Image */}
       <div className="relative rounded-lg overflow-hidden group">
         <AspectRatio ratio={3 / 2} className="bg-muted">
           <Image
-            src="https://images.unsplash.com/photo-1588854337221-4cf9fa96059c?auto=format&fit=crop&w=600&h=400&q=80"
+            src="/after.webp"
             alt="Clean air duct after professional service"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        </AspectRatio>
+        <div className="absolute top-4 left-4 bg-[hsl(var(--duct-primary))]/80 backdrop-blur-sm text-white px-4 py-2 rounded-md">
+          After
+        </div>
+      </div>
+
+      {/* Second Before Image */}
+      <div className="relative rounded-lg overflow-hidden group">
+        <AspectRatio ratio={3 / 2} className="bg-muted">
+          <Image
+            src="/afters.png"
+            alt="Car interior before detailing"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+          />
+        </AspectRatio>
+        <div className="absolute top-4 left-4 bg-background/80 backdrop-blur-sm text-white px-4 py-2 rounded-md">
+          Before
+        </div>
+      </div>
+
+      {/* Second After Image */}
+      <div className="relative rounded-lg overflow-hidden group">
+        <AspectRatio ratio={3 / 2} className="bg-muted">
+          <Image
+            src="/befores.png"
+            alt="Car interior after detailing"
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 50vw"

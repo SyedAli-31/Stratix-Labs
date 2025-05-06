@@ -62,8 +62,6 @@ export type SocialMediaLinks = {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    { name: "Case Studies", href: "/case-studies" },
-    { name: "Testimonials", href: "/testimonials" },
     { name: "Contact", href: "/contact" }
   ];
   
@@ -71,8 +69,8 @@ export type SocialMediaLinks = {
   export const services: Service[] = [
     {
       id: 1,
-      slug: "web-development",
-      title: "Web Development",
+      slug: "digital-marketing",
+      title: "Digital Marketing",
       description: "Modern websites that perform beautifully.",
       color: "from-purple-500 to-blue-500",
     },
@@ -92,7 +90,7 @@ export type SocialMediaLinks = {
     },
     {
       id: 4,
-      slug:"social-media",
+      slug:"social-media-management",
       title: "Social Media Management",
       description: "Strategic social media presence that builds community, increases engagement, and drives brand awareness.",
        
