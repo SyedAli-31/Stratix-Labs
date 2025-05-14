@@ -24,7 +24,7 @@ const TestimonialCard = ({
       className="flex-shrink-0 px-4 py-6"
       style={{ width: slideWidth }}
     >
-      <Card className="bg-black/40 backdrop-blur-sm border-gray-800 h-full p-6 transition-all duration-300 hover:border-primary">
+      <Card className="bg-black/95 backdrop-blur-sm border-gray-800 h-full p-6 transition-all duration-300 hover:border-primary">
         <div className="flex items-center mb-4">
           <Image
             src={image}

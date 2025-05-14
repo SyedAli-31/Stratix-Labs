@@ -1,179 +1,476 @@
 'use client';
-
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { otherServices } from '@/lib/data';
+import { notFound } from 'next/navigation';
+import { Check, Rocket, BarChart, Shield, Infinity, ArrowLeft, ChevronRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Check } from 'lucide-react';
-import { services } from '@/lib/data';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
+import { use } from 'react';
 
-// ✅ Define Service type based on services array
-type Service = (typeof services)[number];
+// Define the service type based on what's expected from otherServices
+interface Service {
+  slug: string;
+  title: string;
+  desc: string;
+  // Add other properties your service object might have
+}
 
-const ServicePage = () => {
-  const { slug } = useParams();
-  const router = useRouter();
-  const [service, setService] = useState<Service | null>(null);
-  const [contentRef] = useScrollAnimation<HTMLDivElement>();
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+const ServiceDetailPage = ({ params }: Props) => {
+  const { slug } = use(params);
+  const service = otherServices.find((s: Service) => s.slug === slug);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
-    if (slug) {
-      const found = services.find((s) => s.slug === slug);
-      if (found) {
-        setService(found);
-      } else {
-        router.push('/services');
-      }
-    }
-  }, [slug, router]);
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 800); // simulate a short loading time
+    return () => clearTimeout(timer);
+  }, []);
 
-  if (!service) {
+  if (!service) return notFound();
+
+  if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-950">
-        <p className="text-white text-xl">Loading service...</p>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from-blue-950 to-blue-900">
+        <div className="relative w-24 h-24">
+          <div className="absolute top-0 left-0 right-0 bottom-0 animate-spin rounded-full h-full w-full border-4 border-t-transparent border-blue-400" />
+          <div className="absolute top-2 left-2 right-2 bottom-2 animate-pulse rounded-full h-5/6 w-5/6 bg-blue-100/20" />
+        </div>
+        <h2 className="mt-8 text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent">
+          Loading Stratix Magic...
+        </h2>
       </div>
     );
   }
-
-  const benefits = [
-    "Customized strategies tailored to your specific business goals",
-    "Data-driven approach with regular performance reports",
-    "Expert team with years of industry experience",
-    "Transparent pricing with no hidden fees",
-    "Continuous optimization based on real-time insights"
-  ];
-
-  const process = [
-    { step: 1, title: "Discovery & Analysis", description: "We analyze your business and market." },
-    { step: 2, title: "Strategy Development", description: "Custom strategies aligned to your goals." },
-    { step: 3, title: "Implementation", description: "We implement with precision." },
-    { step: 4, title: "Monitoring & Optimization", description: "Ongoing refinement to boost ROI." },
-    { step: 5, title: "Reporting & Evaluation", description: "Clear, transparent performance reports." }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.1 }
+      transition: { staggerChildren: 0.12, delayChildren: 0.1 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 100 }
+    }
   };
 
-  return (
-    <div className="pt-24 pb-20 min-h-screen bg-gray-950">
-      {/* HERO */}
-      <div className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 z-0 opacity-20"
-          style={{
-            backgroundImage: `linear-gradient(to bottom right, ${service.color.split('from-')[1].split(' ')[0]}, ${service.color.split('to-')[1]})`,
-            backgroundSize: 'cover'
-          }}
-        />
-        <div className="container mx-auto px-4 md:px-8 py-20 relative z-10">
-          <Link href="/services">
-            <Button variant="outline" className="mb-8 border-gray-700 text-gray-300 hover:bg-gray-800">
-              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
-            </Button>
-          </Link>
 
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-primary to-gold">
-              {service.title}
-            </h1>
-            <p className="text-xl text-gray-300 mb-8">{service.description}</p>
-            <Link href="/contact">
-              <Button className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg">
-                Get a Free Consultation
-              </Button>
-            </Link>
+
+  interface ProcessStep {
+    title: string;
+    description: string;
+  }
+
+  const processSteps: ProcessStep[] = [
+    { title: "Discovery & Analysis", description: "We conduct a comprehensive analysis of your business needs, market position, and target audience to establish clear objectives and KPIs." },
+    { title: "Strategy Development", description: "Our experts craft custom strategies aligned with your business goals, with a clear roadmap for implementation and expected outcomes." },
+    { title: "Implementation", description: "We execute the strategy with precision, utilizing cutting-edge tools and methodologies to maximize efficiency and effectiveness." },
+    { title: "Reporting & Evaluation", description: "Receive detailed performance reports with actionable insights to understand the impact of our services on your business metrics." },
+    { title: "Monitoring & Optimization", description: "Continuous refinement of strategies based on real-time data to ensure optimal ROI and sustained growth." },
+  ];
+
+  const benefits: string[] = [
+    "Customized strategies tailored to your specific business goals and market position",
+    "Data-driven approach with regular performance reports and actionable insights",
+    "Expert team with years of industry experience across diverse market segments",
+    "Transparent pricing with no hidden fees and a clear return on investment framework",
+    "Continuous optimization based on real-time analytics and market trends"
+  ];
+
+  interface Stat {
+    icon: React.ReactNode;
+    title: string;
+    desc: string;
+  }
+
+  const stats: Stat[] = [
+    {
+      icon: <BarChart className="h-10 w-10 text-blue-500" />,
+      title: "250% ROI",
+      desc: "Average client return on investment with our data-driven marketing strategies"
+    },
+    {
+      icon: <Infinity className="h-10 w-10 text-blue-500" />,
+      title: "24/7 Support",
+      desc: "Round-the-clock dedicated assistance for all your marketing needs"
+    },
+    {
+      icon: <Shield className="h-10 w-10 text-blue-500" />,
+      title: "100% Secure",
+      desc: "Enterprise-grade security protocols protecting your data and campaigns"
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
+      {/* Hero Section with parallax effect */}
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 opacity-25">
+            <svg
+              className="w-full h-full"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0 50 Q 25 0, 50 50 T 100 50 V 100 H 0 Z"
+                fill="url(#heroGradient)"
+              />
+              <defs>
+                <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#1E40AF" />
+                  <stop offset="100%" stopColor="#3B82F6" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20"></div>
+        </div>
+
+        <motion.div
+          className="relative py-32 md:py-40"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col items-start">
+              <Link href="/services">
+                <Button variant="outline" className="mb-12 border border-blue-300/30 text-blue-100 hover:bg-blue-800/50 rounded-full px-6 py-2 shadow-lg backdrop-blur-sm">
+                  <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
+                </Button>
+              </Link>
+
+              <div className="max-w-3xl">
+                <motion.div className="inline-block mb-3 px-4 py-1 rounded-full bg-blue-100/20 backdrop-blur-sm text-blue-100 text-sm font-medium" variants={itemVariants}>
+                  Premium Digital Service
+                </motion.div>
+
+                <motion.h1
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight"
+                  variants={itemVariants}
+                >
+                  {service.title}
+                </motion.h1>
+
+                <motion.div
+                  className="w-20 h-1.5 bg-blue-400 rounded-full mb-8"
+                  variants={itemVariants}
+                />
+
+                <motion.p
+                  className="text-xl md:text-2xl text-blue-50 max-w-3xl mb-12 font-light leading-relaxed"
+                  variants={itemVariants}
+                >
+                  {service.desc}
+                </motion.p>
+
+                <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+                  <Button
+                    size="lg"
+                    className="bg-white hover:bg-blue-50 text-blue-900 font-semibold rounded-full px-8 py-6 shadow-xl hover:shadow-blue-300/30 transition-all duration-300 text-base"
+                  >
+                    <Rocket className="mr-3 h-5 w-5" />
+                    Start Your Project
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-white/30 text-white hover:bg-white/10 font-medium rounded-full px-8 py-6 transition-all duration-300 text-base"
+                  >
+                    Book a Consultation
+                  </Button>
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Wave separator */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" className="w-full h-[60px] md:h-[120px]">
+            <path d="M0 120L48 108C96 96 192 72 288 66C384 60 480 72 576 78C672 84 768 84 864 78C960 72 1056 60 1152 60C1248 60 1344 72 1392 78L1440 84V0H1392C1344 0 1248 0 1152 0C1056 0 960 0 864 0C768 0 672 0 576 0C480 0 384 0 288 0C192 0 96 0 48 0H0V120Z" fill="white" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Stats Section with Card Rotation on Hover */}
+      <div className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-3">Our Performance</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-blue-900">Driving Measurable Results</h3>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                whileHover={{
+                  y: -10,
+                  boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.15)"
+                }}
+                className="p-8 rounded-2xl bg-white border border-blue-100 shadow-lg hover:shadow-2xl transition-all duration-500"
+              >
+                <div className="flex flex-col items-center text-center">
+                  <div className="p-4 rounded-full bg-blue-50 mb-6">
+                    {stat.icon}
+                  </div>
+                  <h3 className="text-2xl font-bold text-blue-900 mb-3">{stat.title}</h3>
+                  <p className="text-gray-600">{stat.desc}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* DETAILS */}
-      <div ref={contentRef as React.RefObject<HTMLDivElement>} className="container mx-auto px-4 md:px-8 py-16">
-        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-          {/* Left */}
-          <motion.div variants={itemVariants}>
-            <h2 className="text-3xl font-bold mb-6 text-white">About Our {service.title} Service</h2>
-            <p className="text-gray-300 mb-6">
-              At Stratix Labs, our {service.title} service is designed to help businesses achieve real results.
-            </p>
-            <p className="text-gray-300 mb-6">
-              Our experienced professionals tailor strategies to your goals, backed by data and innovation.
-            </p>
-            <h3 className="text-2xl font-bold mb-4 text-white">Key Benefits</h3>
-            <ul className="space-y-3 mb-8">
-              {benefits.map((b, i) => (
-                <li key={i} className="flex items-start">
-                  <Check className="h-5 w-5 text-primary mr-2 mt-1" />
-                  <span className="text-gray-300">{b}</span>
-                </li>
-              ))}
-            </ul>
-            <Link href="/contact">
-              <Button className="bg-gradient-to-r from-primary to-primary/80 text-white">Discuss Your Project</Button>
-            </Link>
-          </motion.div>
+      {/* Service Benefits Section */}
+      <div className="bg-blue-900 py-24 md:py-32 relative overflow-hidden">
+        {/* Abstract background pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#smallGrid)" />
+          </svg>
+        </div>
 
-          {/* Right */}
-          <motion.div variants={itemVariants}>
-            <h2 className="text-3xl font-bold mb-6 text-white">Our Process</h2>
-            <div className="space-y-8">
-              {process.map(step => (
-                <div key={step.step} className="relative pl-12 border-l border-gray-800">
-                  <div className="absolute left-0 top-0 -translate-x-1/2 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-primary/70 text-white font-bold flex items-center justify-center">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-white">{step.title}</h3>
-                  <p className="text-gray-300">{step.description}</p>
-                </div>
-              ))}
-            </div>
-            <div className="mt-12 p-8 bg-gray-900 rounded-lg border border-gray-800">
-              <h3 className="text-2xl font-bold mb-4 text-white">Ready to Get Started?</h3>
-              <p className="text-gray-300 mb-6">Let’s elevate your business with {service.title}. Reach out today.</p>
-              <Link href="/contact">
-                <Button className="w-full bg-primary text-white">Schedule a Consultation</Button>
-              </Link>
-            </div>
-          </motion.div>
-        </motion.div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            {/* Left Side - Benefits */}
+            <motion.div
+              className="flex flex-col"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <div className="inline-block px-4 py-1 rounded-full bg-blue-100/20 backdrop-blur-sm text-blue-100 text-sm font-medium mb-6">
+                Why Choose Us
+              </div>
 
-        {/* Related Services */}
-        <div className="mt-20">
-          <h2 className="text-3xl font-bold mb-8 text-center text-white">Explore Related Services</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services
-              .filter((s) => s.slug !== slug)
-              .slice(0, 3)
-              .map((s) => (
-                <div key={s.id} className="bg-gray-900 border border-gray-800 rounded-lg hover:border-primary/50">
-                  <div className={`h-2 bg-gradient-to-r ${s.color}`}></div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
-                    <p className="text-gray-400 text-sm mb-4 line-clamp-2">{s.description}</p>
-                    <Link href={`/service/${s.slug}`}>
-                      <Button variant="outline" className="w-full text-gray-300 hover:bg-gray-800">
-                        Learn More
-                      </Button>
-                    </Link>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-10 leading-tight">
+                Transformative Benefits That <span className="text-blue-300">Drive Growth</span>
+              </h2>
+
+              <div className="space-y-6">
+                {benefits.map((benefit, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="flex items-start gap-4 group"
+                  >
+                    <div className="mt-1 flex-shrink-0 w-8 h-8 rounded-full bg-blue-400/30 group-hover:bg-blue-400/50 flex items-center justify-center transition-all duration-300">
+                      <Check className="h-4 w-4 text-blue-100" />
+                    </div>
+                    <p className="text-lg text-blue-100 leading-relaxed">
+                      {benefit}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Right Side - Image/Visual */}
+            <motion.div
+              className="rounded-2xl overflow-hidden shadow-2xl shadow-blue-500/20 border border-blue-700/50"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            >
+              <div className="aspect-video bg-gradient-to-br from-blue-700 to-blue-900 p-8 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="flex justify-center mb-6">
+                    <div className="p-3 bg-blue-600/30 rounded-full">
+                      <Star className="h-14 w-14 text-blue-200" />
+                    </div>
                   </div>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Results-Driven Approach</h3>
+                  <p className="text-blue-100 max-w-md mx-auto">
+                    Our analytical methodology ensures measurable outcomes and continuous improvement for your marketing campaigns.
+                  </p>
                 </div>
-              ))}
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Wave separator */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" className="w-full h-[60px] md:h-[120px]">
+            <path d="M0 120L48 108C96 96 192 72 288 66C384 60 480 72 576 78C672 84 768 84 864 78C960 72 1056 60 1152 60C1248 60 1344 72 1392 78L1440 84V120H0V120Z" fill="white" />
+          </svg>
+        </div>
+      </div>
+
+      {/* Process Section with Interactive Tabs */}
+      <div className="py-24 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <div className="inline-block px-4 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-6">
+              Our Methodology
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
+              A Proven Process for Success
+            </h2>
+            <p className="text-gray-600 text-lg">
+              Our systematic approach ensures consistent results and maximum value for your business.
+            </p>
+          </motion.div>
+
+          {/* Interactive Process Tabs - Scrollable on mobile */}
+          <div className="mb-8 flex justify-center overflow-x-auto pb-2 px-4 -mx-4 md:px-0 md:-mx-0">
+            <div className="inline-flex rounded-full p-1 bg-blue-50 border border-blue-100 whitespace-nowrap">
+              {processSteps.map((step, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveTab(idx)}
+                  className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-300 ${activeTab === idx
+                      ? 'bg-blue-600 text-white shadow-md'
+                      : 'text-blue-700 hover:bg-blue-100'
+                    }`}
+                >
+                  Step {idx + 1}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="bg-white rounded-2xl shadow-xl border border-blue-100 p-6 sm:p-8 md:p-12"
+              >
+                <div className="flex flex-col md:flex-row gap-8 items-center">
+                  <div className="w-full md:w-2/5 flex-shrink-0">
+                    <div className="aspect-square rounded-2xl bg-blue-100 p-8 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-blue-600 text-white text-xl sm:text-2xl font-bold flex items-center justify-center mx-auto mb-6">{activeTab + 1}</div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-blue-900">{processSteps[activeTab].title}</h3>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="w-full md:w-3/5">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-blue-900 mb-4 sm:mb-6">{processSteps[activeTab].title}</h3>
+                    <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">{processSteps[activeTab].description}</p>
+
+                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                      <Button
+                        variant="outline"
+                        onClick={() => setActiveTab((prev) => (prev === 0 ? processSteps.length - 1 : prev - 1))}
+                        className="border-blue-200 text-blue-700 hover:bg-blue-50 w-full sm:w-auto"
+                      >
+                        Previous Step
+                      </Button>
+
+                      <Button
+                        onClick={() => setActiveTab((prev) => (prev === processSteps.length - 1 ? 0 : prev + 1))}
+                        className="bg-blue-600 hover:bg-blue-700 text-white w-full sm:w-auto"
+                      >
+                        Next Step <ChevronRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="relative py-24 overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20"></div>
+
+        {/* Abstract shapes */}
+        <div className="absolute top-1/2 left-1/4 w-64 h-64 rounded-full bg-blue-400/20 filter blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 rounded-full bg-blue-700/20 filter blur-3xl"></div>
+
+        <motion.div
+          className="max-w-4xl mx-auto px-4 text-center relative z-10"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <div className="inline-block px-4 py-1 rounded-full bg-blue-100/20 backdrop-blur-sm text-blue-100 text-sm font-medium mb-6">
+            Get Started Today
+          </div>
+
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 leading-tight">
+            Ready to Revolutionize Your <span className="text-blue-300">Marketing Strategy</span>?
+          </h2>
+
+          <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
+            Join hundreds of successful businesses that have transformed their digital presence with our expert services.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button
+              size="lg"
+              className="bg-white hover:bg-blue-50 text-blue-900 font-semibold rounded-full px-8 py-6 shadow-xl hover:shadow-blue-300/30 transition-all duration-300 text-base"
+            >
+              <Rocket className="mr-3 h-5 w-5" />
+              Launch Your Success Now
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white/30 text-white hover:bg-white/10 font-medium rounded-full px-8 py-6 transition-all duration-300 text-base"
+            >
+              Schedule a Strategy Call
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
 };
 
-export default ServicePage;
+export default ServiceDetailPage;

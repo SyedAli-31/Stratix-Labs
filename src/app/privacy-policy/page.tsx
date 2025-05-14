@@ -1,15 +1,15 @@
-"use client";
 import React from "react";
-import Link from "next/link";
 
 const PrivacyPolicy = () => {
   return (
     <div className="">
-      <h1 className="text-3xl mt-[100px] md:text-5xl font-extrabold text-center text-yellow-700 mb-6 leading-tight">
+      <h1 className="text-3xl md:text-5xl font-extrabold text-center text-[#5e61fd] mt-10 leading-tight">
         Privacy Policy of Stratix Labs
       </h1>
-      <div className="min-h-screen bg-background text-foreground py-2 mt-0 px-6 md:px-12">
+
+      <div className="min-h-screen bg-background text-foreground mt-10 px-6 md:px-12">
         <div className="bg-card backdrop-blur-xl bg-opacity-30 rounded-lg shadow-lg p-8 border border-border font-sans">
+
           <p className="text-lg md:text-xl text-center mb-8 text-muted-foreground leading-relaxed">
             At Stratix Labs, we respect your privacy and are committed to protecting the personal information you share with us. This Privacy Policy outlines the types of information we collect, how we use it, and the measures we take to protect your privacy.
           </p>
@@ -83,9 +83,9 @@ const PrivacyPolicy = () => {
             </ul>
             <p className="text-base md:text-lg text-muted-foreground mt-4">
               To exercise these rights, contact us at{' '}
-              <Link href="mailto:stratixlabs@gmail.com" className="text-yellow-600 hover:text-accent-foreground">
-                stratixlabs@gmail.com
-              </Link>.
+              <a href="mailto:contact@stratixlabs.com" className="text-yellow-600  hover:text-accent-foreground">
+                contact@stratixlabs.com
+              </a>.
             </p>
           </section>
 
@@ -105,7 +105,7 @@ const PrivacyPolicy = () => {
               <strong>Stratix Labs</strong>
             </p>
             <p className="text-base md:text-lg text-muted-foreground mt-2">
-              Email: <Link href="mailto:stratixlabs@gmail.com" className="text-yellow-600 hover:text-accent-foreground">stratixlabs@gmail.com</Link>
+              Email: <a href="mailto:contact@stratixlabs.com" className="text-yellow-600 hover:text-accent-foreground">contact@stratixlabs.com</a>
             </p>
             <p className="text-base md:text-lg text-muted-foreground mt-2">
               Phone: <strong>+123 456 7890</strong>

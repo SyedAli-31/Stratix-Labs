@@ -32,7 +32,7 @@ const ServiceCard = ({
     <motion.div variants={variants}>
       <Card
         onClick={handleCardClick}
-        className="bg-gradient-to-br from-[#1e1b4b] to-[#2e1065] backdrop-blur-sm border border-violet-800 hover:border-amber-400 transition-all duration-300 overflow-hidden group cursor-pointer"
+        className="bg-gradient-to-br from-[#ffffff] to-[#dbd9e4] backdrop-blur-sm border border-violet-800 hover:border-amber-400 transition-all duration-300 overflow-hidden group cursor-pointer"
       >
         <div className="p-6 h-full flex flex-col">
           <div
@@ -41,13 +41,13 @@ const ServiceCard = ({
             {icon}
           </div>
 
-          <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-amber-400 transition-colors">
+          <h3 className="text-xl font-semibold mb-3 text-[#080662] group-hover:text-blue-600 transition-colors">
             {title}
           </h3>
 
-          <p className="text-gray-300 mb-6 flex-grow">{description}</p>
+          <p className="text-gray-800 mb-6 flex-grow">{description}</p>
 
-          <div className="inline-flex items-center text-amber-500 hover:text-amber-400 transition-colors mt-auto">
+          <div className="inline-flex items-center font-black  hover:from-blue-300 hover:to-blue-700  text-[#0d0b32]  transition-colors mt-auto">
             Learn More
             <svg
               className="ml-2 -mr-1 w-4 h-4"

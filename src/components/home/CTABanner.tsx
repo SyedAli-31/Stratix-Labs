@@ -52,7 +52,7 @@ const CTABanner = ({
             <Link href={buttonLink} passHref>
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-6 text-lg shadow-lg"
+                className="bg-[#00008b] hover:from-blue-600 hover:to-blue-700 text-white px-8 py-6 text-lg shadow-lg"
               >
                 {buttonText}
               </Button>

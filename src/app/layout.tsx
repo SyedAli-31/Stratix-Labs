@@ -5,7 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import CookieConsent from "@/components/ui/CookieConsent";
-import BackToTop from "@/components/ui/BackToTop";
+
 import { Toaster } from "@/components/ui/toaster"
 
 
@@ -40,7 +40,7 @@ export default function RootLayout({
         <Footer/>
         <FloatingWhatsApp phoneNumber="+923475933141" />
         <CookieConsent/>
-        <BackToTop/>
+       
         
       </body>
     </html>

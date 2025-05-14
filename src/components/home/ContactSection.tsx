@@ -27,7 +27,7 @@ const steps = [
 
 export default function ContactSection() {
   return (
-    <section className="py-24 flex justify-center bg-background">
+    <section className="py-24 flex justify-center bg-black/10">
       <div className="container px-6 md:px-12 lg:px-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,7 +36,7 @@ export default function ContactSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl font-bold mb-4 text-foreground">
-            <span className="text-primary">Start Your Project</span> with Us Today
+            <span className="text-[#5454e1]">Start Your Project</span> with Us Today
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto">
             We&apos;d love to connect with you and figure out how we can contribute to your success.
@@ -66,16 +66,16 @@ export default function ContactSection() {
                 )}
               </div>
 
-              <div className="bg-card p-6 rounded-lg border border-border group hover:border-primary transition-all duration-300 shadow-md">
+              <div className="bg-white p-6 rounded-lg border border-border group hover:border-primary transition-all duration-300 shadow-md">
                 <div className="flex items-start gap-4">
                   <div className="bg-primary/10 rounded-full p-4">
                     <step.icon className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    <div className="text-xl font-bold text-primary mb-2 group-hover:text-primary transition-colors">
                       {step.title}
                     </div>
-                    <p className="text-muted-foreground">{step.description}</p>
+                    <p className="text-black">{step.description}</p>
                   </div>
                 </div>
               </div>
@@ -92,7 +92,7 @@ export default function ContactSection() {
           <Link
             href="/contact"
             passHref
-            className="inline-block text-lg px-6 py-2 bg-primary hover:bg-purple-700 text-white rounded-lg shadow-md transition-colors duration-300"
+            className="inline-block text-lg px-6 py-2 bg-[#00008b] hover:bg-blue-700 text-white rounded-lg shadow-md transition-colors duration-300"
           >
             Schedule a Meeting
           </Link>

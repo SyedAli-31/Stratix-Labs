@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Home from './homes/page';
+
 // import TrustBadges from "@/components/home/Trustbadges";
 import ContactSection from "@/components/home/ContactSection";
 import Hero from "@/components/home/Hero";
@@ -58,7 +58,7 @@ const Page = () => {
         {/* <TrustBadges /> */}
         <WhyChooseUs />
         <SecRecent />
-        <Home/>
+       
         <TechIndex />
         
         <Statistics />

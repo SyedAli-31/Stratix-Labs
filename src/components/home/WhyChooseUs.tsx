@@ -16,18 +16,18 @@ const features = [
 
 const WhyChooseUs: React.FC = () => {
   return (
-    <section className="py-20 flex justify-center bg-black relative overflow-hidden px-6 md:px-10 lg:px-16">
-      {/* Background Animations on both sides */}
+    <section className="py-20 flex justify-center bg-white relative overflow-hidden px-6 md:px-10 lg:px-16">
+      {/* Subtle Background Glow */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.3, 0.1] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-r from-purple-700 to-purple-500 rounded-full filter blur-3xl opacity-15"
+          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-r from-blue-900 to-blue-600 rounded-full filter blur-3xl opacity-10"
         />
         <motion.div
-          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.3, 0.1] }}
+          animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 8, repeat: Infinity, repeatType: "reverse" }}
-          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-l from-purple-700 to-purple-500 rounded-full filter blur-3xl opacity-15"
+          className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-l from-blue-900 to-blue-600 rounded-full filter blur-3xl opacity-10"
         />
       </div>
 
@@ -45,7 +45,7 @@ const WhyChooseUs: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
               viewport={{ once: true }}
-              className="text-4xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-purple-700 to-purple-400 bg-clip-text"
+              className="text-4xl font-bold mb-6 text-center text-transparent bg-gradient-to-r from-blue-900 to-blue-600 bg-clip-text"
             >
               WHY CHOOSE US
             </motion.h2>
@@ -55,7 +55,7 @@ const WhyChooseUs: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.8 }}
               viewport={{ once: true }}
-              className="text-gray-300 space-y-4 text-lg text-center md:text-left"
+              className="text-gray-700 space-y-4 text-lg text-center md:text-left"
             >
               <p>
                 Our teams of experts are the driving force behind all of our successes.
@@ -76,7 +76,7 @@ const WhyChooseUs: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-r from-purple-800 to-purple-600 rounded-lg p-8 border border-gray-800"
+            className="bg-gradient-to-br from-blue-900 to-blue-700 rounded-xl p-8 border border-blue-800 shadow-xl"
           >
             <div className="space-y-4">
               {features.map((feature, index) => (
@@ -88,10 +88,10 @@ const WhyChooseUs: React.FC = () => {
                   viewport={{ once: true }}
                   className="flex items-center gap-3"
                 >
-                  <div className="flex-shrink-0 w-6 h-6 bg-purple-600/60 rounded-full flex items-center justify-center">
+                  <div className="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
                     <Check className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-gray-300">{feature}</span>
+                  <span className="text-white">{feature}</span>
                 </motion.div>
               ))}
             </div>

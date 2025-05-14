@@ -73,9 +73,9 @@ const services = [
 ];
 
 const Services = () => {
-  const [hydrated, setHydrated] = useState(false); // To check if the component is mounted
+  const [hydrated, setHydrated] = useState(false);
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-  
+
   useEffect(() => {
     setHydrated(true);
   }, []);
@@ -94,45 +94,33 @@ const Services = () => {
   };
 
   if (!hydrated) {
-    return null; // Ensure nothing is rendered until hydration is complete
+    return null;
   }
 
   return (
-    <section id="services" className="relative py-20 overflow-hidden" ref={ref}>
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-black to-gray-900 opacity-95 z-0"></div>
+    <div id="services" className="relative py-10 bg-blue-600  overflow-hidden" ref={ref}>
+      {/* Background Layers */}
+       
 
-      {/* Animated Pattern */}
-      <motion.div
-        className="absolute inset-0 opacity-10 z-0"
-        initial={{ backgroundPosition: "0% 0%" }}
-        animate={{ backgroundPosition: "100% 100%" }}
-        transition={{ duration: 30, repeat: Infinity, repeatType: "reverse" }}
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          backgroundSize: "30px 30px",
-        }}
-      />
-
-      {/* Content */}
+      {/* Foreground Content */}
       <div className="relative container mx-auto px-4 md:px-8 z-10">
+        {/* Section Heading */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-16"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-amber-300 to-amber-500">
-              Our Services
-            </h1>
-            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              Discover our comprehensive range of marketing services designed to elevate your brand,
-              engage your audience, and drive measurable results for your business.
-            </p>
-          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-500 via-white to-gray-300">
+            Our Services
+          </h1>
+          <p className="text-lg text-gray-200 max-w-3xl mx-auto">
+            Discover our comprehensive range of marketing services designed to elevate your brand,
+            engage your audience, and drive measurable results for your business.
+          </p>
         </motion.div>
 
+        {/* Service Cards Grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
@@ -153,13 +141,14 @@ const Services = () => {
           ))}
         </motion.div>
 
-        <CTABanner 
+        {/* CTA Banner */}
+        <CTABanner
           heading="Ready to Elevate Your Brand?"
           subheading="Schedule a consultation with our experts to discuss how our services can be tailored to your specific needs."
           buttonText="Book a Free Strategy Call"
         />
       </div>
-    </section>
+    </div>
   );
 };
 
