@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { ReactNode } from "react";
-import { motion, Variants } from "framer-motion";
-import { Card } from "@/components/ui/card";
-import { useRouter } from "next/navigation";
+import { ReactNode, useCallback } from 'react';
+import { motion, Variants } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { useRouter } from 'next/navigation';
 
 interface ServiceCardProps {
   id: number;
@@ -24,12 +24,15 @@ const ServiceCard = ({
 }: ServiceCardProps) => {
   const router = useRouter();
 
-  const handleCardClick = () => {
+  const handleCardClick = useCallback(() => {
     router.push(`/service/${id}`);
-  };
+  }, [id, router]);
 
   return (
-    <motion.div variants={variants}>
+    <motion.div
+      variants={variants}
+      onMouseEnter={() => router.prefetch(`/service/${id}`)} // 🧠 Prefetch the route
+    >
       <Card
         onClick={handleCardClick}
         className="bg-gradient-to-br from-[#ffffff] to-[#dbd9e4] backdrop-blur-sm border border-violet-800 hover:border-amber-400 transition-all duration-300 overflow-hidden group cursor-pointer"
@@ -47,7 +50,7 @@ const ServiceCard = ({
 
           <p className="text-gray-800 mb-6 flex-grow">{description}</p>
 
-          <div className="inline-flex items-center font-black  hover:from-blue-300 hover:to-blue-700  text-[#0d0b32]  transition-colors mt-auto">
+          <div className="inline-flex items-center font-black text-[#0d0b32] hover:from-blue-300 hover:to-blue-700 transition-colors mt-auto">
             Learn More
             <svg
               className="ml-2 -mr-1 w-4 h-4"

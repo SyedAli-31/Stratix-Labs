@@ -14,27 +14,11 @@ export default function Statistics() {
   return (
     <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 flex justify-center bg-[#234bba] overflow-hidden">
       {/* 🎨 Background animation */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="absolute inset-0 z-0"
-      >
-        <motion.div
-          className="w-full h-full"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 20%, #dbeafe 0%, transparent 60%)',
-              'radial-gradient(circle at 80% 30%, #e0e7ff66, transparent 70%)',
-              'radial-gradient(circle at 50% 80%, #c7d2fe33, transparent 60%)',
-            ],
-          }}
-          transition={{
-            repeat: Infinity,
-            duration: 12,
-            ease: 'easeInOut',
-          }}
-        />
-      </motion.div>
+      <div
+        className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,#dbeafe_0%,transparent_60%)] 
+        sm:bg-[radial-gradient(circle_at_80%_30%,#e0e7ff66,transparent_70%),radial-gradient(circle_at_50%_80%,#c7d2fe33,transparent_60%)] 
+        transition-all duration-[12s] ease-in-out animate-pulse"
+      />
 
       {/* 💬 Content */}
       <div className="relative z-10 container max-w-6xl flex flex-col md:flex-row items-center md:items-start gap-10 bg-white rounded-xl shadow-xl p-6 sm:p-12 border border-blue-200">
@@ -58,7 +42,7 @@ export default function Statistics() {
         {/* 📊 Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-6 w-full">
           {stats.map((stat, index) => (
-            <AnimatedStat key={index} number={stat.number} label={stat.label} />
+            <StatItem key={index} number={stat.number} label={stat.label} />
           ))}
         </div>
       </div>
@@ -66,29 +50,29 @@ export default function Statistics() {
   );
 }
 
-function AnimatedStat({ number, label }: { number: number; label: string }) {
+function StatItem({ number, label }: { number: number; label: string }) {
   const count = useMotionValue(0);
   const [displayNumber, setDisplayNumber] = useState(0);
-  const [startAnimation, setStartAnimation] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (startAnimation) {
+    if (hasAnimated) {
       const controls = animate(count, number, {
-        duration: 2.5,
+        duration: 2.2,
         ease: 'easeOut',
         onUpdate: (latest) => setDisplayNumber(Math.floor(latest)),
       });
       return () => controls.stop();
     }
-  }, [startAnimation, count, number]);
+  }, [hasAnimated, number, count]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
       viewport={{ once: true, amount: 0.5 }}
-      onViewportEnter={() => setStartAnimation(true)}
+      onViewportEnter={() => setHasAnimated(true)}
+      transition={{ duration: 0.7, ease: 'easeOut' }}
       className="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-6 w-full max-w-[200px] h-[120px] text-center flex flex-col justify-center shadow-lg border border-blue-300 hover:scale-105 transition-transform duration-300"
     >
       <h3 className="text-3xl sm:text-4xl font-bold text-white mb-1 drop-shadow-sm">

@@ -6,3 +6,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+export function isMobileDevice() {
+  if (typeof navigator === "undefined") return false;
+  return /Mobi|Android|iPhone/i.test(navigator.userAgent);
+}

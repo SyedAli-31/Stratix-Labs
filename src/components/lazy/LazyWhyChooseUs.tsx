@@ -14,15 +14,12 @@ const features = [
   "Software engineers who understand western work ethic.",
 ];
 
-const WhyChooseUs: React.FC = () => {
+const LazyWhyChooseUs: React.FC = () => {
   return (
     <section className="py-20 flex justify-center bg-white relative overflow-hidden px-6 md:px-10 lg:px-16">
-      {/* Subtle Background Glow */}
-    
-
       <div className="container max-w-7xl relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Left Side: Heading & Text with Animation */}
+          {/* Left Side */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -51,15 +48,10 @@ const WhyChooseUs: React.FC = () => {
                 Together, we believe that anything is possible and work relentlessly to meet
                 or exceed our client&apos;s expectations while staying true to our core values.
               </p>
-              <p>
-                Orient Software is committed to hiring the most talented individuals in
-                Information Technology and providing them with ongoing professional
-                growth and career development opportunities.
-              </p>
             </motion.div>
           </motion.div>
 
-          {/* Right Side: Features List with Animation */}
+          {/* Right Side */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -76,7 +68,7 @@ const WhyChooseUs: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                   className="flex items-center gap-3"
-                 >
+                >
                   <div className="flex-shrink-0 w-6 h-6 bg-white/20 rounded-full flex items-center justify-center">
                     <Check className="w-4 h-4 text-white" />
                   </div>
@@ -91,4 +83,4 @@ const WhyChooseUs: React.FC = () => {
   );
 };
 
-export default WhyChooseUs;
+export default LazyWhyChooseUs;

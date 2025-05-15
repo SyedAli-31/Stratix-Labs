@@ -6,12 +6,13 @@ import { motion } from 'framer-motion';
 // import TrustBadges from "@/components/home/Trustbadges";
 import ContactSection from "@/components/home/ContactSection";
 import Hero from "@/components/home/Hero";
-import SecRecent from "@/components/home/Services";
 import Statistics from "@/components/home/Statistics";
 import TechIndex from "@/components/home/TechIndex";
 import Testimonials from "@/components/home/Testimonials";
  
 import WhyChooseUs from "@/components/home/WhyChooseUs";
+import LazyServices from '@/components/lazy/Lazyservices';
+import LazyWhyChooseUs from '@/components/lazy/LazyWhyChooseUs';
 
 const Page = () => {
   // Smooth scrolling for in-page links
@@ -56,8 +57,9 @@ const Page = () => {
       <main className="flex-grow">
         <Hero />
         {/* <TrustBadges /> */}
-        <WhyChooseUs />
-        <SecRecent />
+       <LazyWhyChooseUs/>
+        <LazyServices/>
+       
        
         <TechIndex />
         

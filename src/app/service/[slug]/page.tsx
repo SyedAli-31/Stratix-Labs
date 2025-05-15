@@ -119,24 +119,10 @@ const ServiceDetailPage = ({ params }: Props) => {
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 opacity-25">
-            <svg
-              className="w-full h-full"
-              viewBox="0 0 100 100"
-              preserveAspectRatio="none"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 50 Q 25 0, 50 50 T 100 50 V 100 H 0 Z"
-                fill="url(#heroGradient)"
-              />
-              <defs>
-                <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#1E40AF" />
-                  <stop offset="100%" stopColor="#3B82F6" />
-                </linearGradient>
-              </defs>
-            </svg>
+            
+              
+              
+           
           </div>
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20"></div>
         </div>
@@ -210,45 +196,6 @@ const ServiceDetailPage = ({ params }: Props) => {
       </div>
 
       {/* Stats Section with Card Rotation on Hover */}
-      <div className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-blue-600 mb-3">Our Performance</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-blue-900">Driving Measurable Results</h3>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{
-                  y: -10,
-                  boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.15)"
-                }}
-                className="p-8 rounded-2xl bg-white border border-blue-100 shadow-lg hover:shadow-2xl transition-all duration-500"
-              >
-                <div className="flex flex-col items-center text-center">
-                  <div className="p-4 rounded-full bg-blue-50 mb-6">
-                    {stat.icon}
-                  </div>
-                  <h3 className="text-2xl font-bold text-blue-900 mb-3">{stat.title}</h3>
-                  <p className="text-gray-600">{stat.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </div>
 
       {/* Service Benefits Section */}
       <div className="bg-blue-900 py-24 md:py-32 relative overflow-hidden">
