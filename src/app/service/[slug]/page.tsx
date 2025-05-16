@@ -95,24 +95,6 @@ const ServiceDetailPage = ({ params }: Props) => {
     desc: string;
   }
 
-  const stats: Stat[] = [
-    {
-      icon: <BarChart className="h-10 w-10 text-blue-500" />,
-      title: "250% ROI",
-      desc: "Average client return on investment with our data-driven marketing strategies"
-    },
-    {
-      icon: <Infinity className="h-10 w-10 text-blue-500" />,
-      title: "24/7 Support",
-      desc: "Round-the-clock dedicated assistance for all your marketing needs"
-    },
-    {
-      icon: <Shield className="h-10 w-10 text-blue-500" />,
-      title: "100% Secure",
-      desc: "Enterprise-grade security protocols protecting your data and campaigns"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
       {/* Hero Section with parallax effect */}

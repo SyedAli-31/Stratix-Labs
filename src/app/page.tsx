@@ -9,8 +9,6 @@ import Hero from "@/components/home/Hero";
 import Statistics from "@/components/home/Statistics";
 import TechIndex from "@/components/home/TechIndex";
 import Testimonials from "@/components/home/Testimonials";
- 
-import WhyChooseUs from "@/components/home/WhyChooseUs";
 import LazyServices from '@/components/lazy/Lazyservices';
 import LazyWhyChooseUs from '@/components/lazy/LazyWhyChooseUs';
 
