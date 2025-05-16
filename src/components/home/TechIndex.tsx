@@ -32,7 +32,7 @@ const philosophies = [
     title: "Our Philosophy",
     path: "/philosophy",
     description: "Guided by principles that define who we are",
-    image: "/model.png",
+    image: "/service.png",
   },
   {
     title: "Our Strategy",
