@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { otherServices } from '@/lib/data';
 import { notFound } from 'next/navigation';
-import { Check, Rocket, BarChart, Shield, Infinity, ArrowLeft, ChevronRight, Star } from 'lucide-react';
+import { Check, Rocket, ArrowLeft, ChevronRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { use } from 'react';
@@ -89,11 +89,6 @@ const ServiceDetailPage = ({ params }: Props) => {
     "Continuous optimization based on real-time analytics and market trends"
   ];
 
-  interface Stat {
-    icon: React.ReactNode;
-    title: string;
-    desc: string;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-blue-50 to-white">
@@ -101,10 +96,7 @@ const ServiceDetailPage = ({ params }: Props) => {
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 opacity-25">
-            
-              
-              
-           
+
           </div>
           <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center opacity-20"></div>
         </div>

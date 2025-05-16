@@ -24,10 +24,13 @@ import {
 } from "react-icons/si";
 
 // Utility functions
-const debounce = <F extends (...args: any[]) => any>(func: F, wait: number): ((...args: Parameters<F>) => void) => {
+const debounce = <T extends (...args: unknown[]) => void>(
+  func: T,
+  wait: number
+): ((...args: Parameters<T>) => void) => {
   let timeout: ReturnType<typeof setTimeout> | null = null;
 
-  return function executedFunction(...args: Parameters<F>): void {
+  return function executedFunction(...args: Parameters<T>): void {
     const later = () => {
       if (timeout !== null) {
         clearTimeout(timeout);
@@ -43,15 +46,22 @@ const debounce = <F extends (...args: any[]) => any>(func: F, wait: number): ((.
   };
 };
 
+
+interface ExtendedNavigator extends Navigator {
+  deviceMemory?: number;
+}
+
 const isLowEndDevice = (): boolean => {
+  const nav = navigator as ExtendedNavigator;
   return (
     typeof navigator !== 'undefined' &&
     (
-      ('deviceMemory' in navigator && (navigator as any).deviceMemory < 4) ||
-      ('hardwareConcurrency' in navigator && navigator.hardwareConcurrency < 4)
+      (nav.deviceMemory !== undefined && nav.deviceMemory < 4) ||
+      (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4)
     )
   );
 };
+
 
 interface FloatingObjectProps {
   children: React.ReactNode;
@@ -78,24 +88,25 @@ const FloatingObject: React.FC<FloatingObjectProps> = ({
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef(null);
 
-  useEffect(() => {
-    if (!elementRef.current) return;
+useEffect(() => {
+  const element = elementRef.current;
+  if (!element) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    },
+    { threshold: 0.1 }
+  );
 
-    observer.observe(elementRef.current);
+  observer.observe(element);
 
-    return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
-    };
-  }, []);
+  return () => {
+    if (element) {
+      observer.unobserve(element);
+    }
+  };
+}, []);
 
   // Simplified animation for low-end devices
   const animationConfig = useMemo(() => {
@@ -148,24 +159,25 @@ const GlowingOrb: React.FC<GlowingOrbProps> = ({ className, size, color, delay =
   const [isVisible, setIsVisible] = useState(false);
   const orbRef = useRef(null);
 
-  useEffect(() => {
-    if (!orbRef.current) return;
+ useEffect(() => {
+  const orb = orbRef.current;
+  if (!orb) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1 }
-    );
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      setIsVisible(entry.isIntersecting);
+    },
+    { threshold: 0.1 }
+  );
 
-    observer.observe(orbRef.current);
+  observer.observe(orb);
 
-    return () => {
-      if (orbRef.current) {
-        observer.unobserve(orbRef.current);
-      }
-    };
-  }, []);
+  return () => {
+    if (orb) {
+      observer.unobserve(orb);
+    }
+  };
+}, []);
 
   // Simplified animation for mobile
   const animationConfig = useMemo(() => {
@@ -240,7 +252,6 @@ const Hero = () => {
     };
   }, []);
 
-  // Cursor glow effect - optimized with debounce and requestAnimationFrame
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -255,18 +266,25 @@ const Hero = () => {
       }
     };
 
-    // Add debounced event listener
-    const debouncedHandleMouseMove = debounce(handleMouseMove, 10);
+    // Type-safe debounce with unknown args signature
+    const debouncedHandleMouseMove: (...args: unknown[]) => void = debounce(
+      handleMouseMove as (...args: unknown[]) => void,
+      10
+    );
 
-    // Only add mouse effect on non-mobile devices
     if (!isMobile) {
       window.addEventListener('mousemove', debouncedHandleMouseMove);
     }
 
     return () => {
-      window.removeEventListener('mousemove', debouncedHandleMouseMove);
+      if (!isMobile) {
+        window.removeEventListener('mousemove', debouncedHandleMouseMove);
+      }
     };
   }, [isMobile]);
+
+ 
+
 
 
   // Calculate stagger delay based on device
