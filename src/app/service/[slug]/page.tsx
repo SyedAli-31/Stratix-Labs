@@ -152,8 +152,8 @@ const ServiceDetailPage = ({ params }: Props) => {
                     variant="outline"
                     size="lg"
                     className="border-white/30 text-white hover:bg-white/10 font-medium rounded-full px-8 py-6 transition-all duration-300 text-base"
-                  >
-                    Book a Consultation
+                  ><Link href={"/contact"}>
+                      Book a Consultation</Link>
                   </Button>
                 </motion.div>
               </div>
@@ -286,8 +286,8 @@ const ServiceDetailPage = ({ params }: Props) => {
                   key={idx}
                   onClick={() => setActiveTab(idx)}
                   className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full transition-all duration-300 ${activeTab === idx
-                      ? 'bg-blue-600 text-white shadow-md'
-                      : 'text-blue-700 hover:bg-blue-100'
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'text-blue-700 hover:bg-blue-100'
                     }`}
                 >
                   Step {idx + 1}

@@ -19,11 +19,11 @@ const CTABanner = ({
 }: CTABannerProps) => {
   return (
     <section className="py-16 relative overflow-hidden">
-      
+
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.h2 
+          <motion.h2
             className="text-3xl md:text-4xl font-bold mb-4 text-white"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const CTABanner = ({
             {heading}
           </motion.h2>
 
-          <motion.p 
+          <motion.p
             className="text-lg text-gray-300 mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -50,9 +50,9 @@ const CTABanner = ({
             viewport={{ once: true }}
           >
             <Link href={buttonLink} passHref>
-              <Button 
-                size="lg" 
-                className="bg-[#00008b] hover:from-blue-600 hover:to-blue-700 text-white px-8 py-6 text-lg shadow-lg"
+              <Button
+                size="lg"
+                className="bg-[#00008b] hover:bg-blue-700 text-white px-8 py-6 text-lg shadow-lg"
               >
                 {buttonText}
               </Button>

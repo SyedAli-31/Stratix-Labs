@@ -1,7 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import AnimatedCounter from '@/components/ui/AnimatedCounter';
 import { CheckCircle, Users, Briefcase, Lightbulb } from 'lucide-react';
 import Image from 'next/image';
 
@@ -126,21 +125,7 @@ const Stratix: React.FC = () => {
             />
 
             {/* Stats cards */}
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg text-center border border-gray-800">
-                <div className="text-3xl font-bold mb-1 text-amber-500">
-                  <AnimatedCounter target={250} suffix="+" duration={2} />
-                </div>
-                <div className="text-sm text-gray-300">Global Clients</div>
-              </div>
-
-              <div className="bg-black/40 backdrop-blur-sm p-4 rounded-lg text-center border border-gray-800">
-                <div className="text-3xl font-bold mb-1 text-amber-500">
-                  <AnimatedCounter target={55} suffix="+" duration={2} />
-                </div>
-                <div className="text-sm text-gray-300">Industry Awards</div>
-              </div>
-            </div>
+            
           </motion.div>
         </motion.div>
 

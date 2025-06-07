@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import CTABanner from "@/components/home/CTABanner";
-
+import { Lightbulb, TrendingUp, ShieldCheck, Globe, Leaf, BookOpen } from "lucide-react";
 // Lazy load Framer Motion only on client
 const LazyMotionDiv = dynamic(() => import("framer-motion").then(mod => mod.motion.div), {
   ssr: false,
@@ -14,26 +15,32 @@ const missionItems = [
   {
     title: "Innovation First",
     description: "Pushing boundaries with cutting-edge technology",
+    icon: Lightbulb,
   },
   {
     title: "Client Success",
     description: "Delivering solutions that drive business growth",
+    icon: TrendingUp,
   },
   {
     title: "Quality Excellence",
     description: "Maintaining highest standards in every project",
+    icon: ShieldCheck,
   },
   {
     title: "Global Impact",
     description: "Creating solutions with worldwide reach",
+    icon: Globe,
   },
   {
     title: "Sustainable Growth",
     description: "Building long-term success for our clients",
+    icon: Leaf,
   },
   {
     title: "Continuous Learning",
     description: "Staying ahead with emerging technologies",
+    icon: BookOpen,
   },
 ];
 
@@ -80,14 +87,32 @@ export default function Mission() {
                   whileHover={{ scale: 1.05, rotateX: 4, rotateY: 4 }}
                   className="transform-gpu"
                 >
-                  <Card className="bg-gradient-to-br from-purple-900 to-indigo-900 border border-purple-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30 transition-all duration-300 rounded-2xl">
-                    <CardContent className="p-6 min-h-[160px] flex flex-col justify-center">
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {item.title}
-                      </h3>
-                      <p className="text-gray-300">{item.description}</p>
+                  <Card className="bg-white border border-gray-200 hover:border-pink-500 shadow-lg hover:shadow-pink-300/30 transition-all duration-300 rounded-2xl">
+                    <CardContent className="p-6 min-h-[240px] flex flex-col justify-between">
+                      {/* Icon */}
+                      <div className="mb-4 flex justify-center">
+                        <div className="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center">
+                          <item.icon className="w-7 h-7 text-pink-600" />
+                        </div>
+                      </div>
+
+                      {/* Title & Description */}
+                      <div>
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 text-center">{item.title}</h3>
+                        <p className="text-gray-600 text-sm sm:text-base text-center">{item.description}</p>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="mt-4 text-sm text-pink-600 text-center font-medium hover:underline cursor-pointer">
+                        <Link href={"/services"}>Discover the Difference →</Link>
+                        
+                      </div>
+
                     </CardContent>
                   </Card>
+
+
+
                 </LazyMotionDiv>
               ))}
             </div>

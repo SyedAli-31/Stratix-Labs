@@ -1,17 +1,8 @@
-'use client';
+import React from 'react'
 
-import { motion, useMotionValue, animate } from 'framer-motion';
-import { useEffect, useState } from 'react';
-
-const stats = [
-  { number: 1500, label: 'Projects Done' },
-  { number: 2000, label: 'Happy Customers' },
-  { number: 28, label: 'Experienced Staff' },
-  { number: 15, label: 'Countries Worldwide' },
-];
-
-export default function Statistics() {
+const Statistics = () => {
   return (
+<<<<<<< HEAD
     <section className="relative py-16 sm:py-24 px-4 sm:px-6 lg:px-8 flex justify-center bg-[#234bba] overflow-hidden">
       {/* 🎨 Background animation */}
       <div
@@ -82,3 +73,12 @@ function StatItem({ number, label }: { number: number; label: string }) {
     </motion.div>
   );
 }
+=======
+    <div>
+      
+    </div>
+  )
+}
+
+export default Statistics
+>>>>>>> b0cdf58 (Initial commit)

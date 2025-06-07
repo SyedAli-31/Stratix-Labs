@@ -19,7 +19,7 @@ const philosophies = [
   {
     title: "Our Mission",
     path: "/mission",
-    description: "Empowering businesses through innovative digital solutions",
+    description: "Empowering businesses through digital solutions",
     image: "/mission.jpg",
   },
   {
@@ -47,7 +47,11 @@ export default function TechIndex() {
 
   return (
     <section className="relative py-28 flex justify-center bg-[#ffffff] overflow-hidden">
+<<<<<<< HEAD
       {/* Decorative Top SVG */}
+=======
+      {/* Decorative SVG top wave */}
+>>>>>>> b0cdf58 (Initial commit)
       <div className="absolute top-0 left-0 w-full z-0 pointer-events-none">
         <svg
           viewBox="0 0 1440 320"
@@ -63,6 +67,7 @@ export default function TechIndex() {
         </svg>
       </div>
 
+<<<<<<< HEAD
       <div className="container relative z-10" ref={ref}>
         {inView && (
           <>
@@ -147,6 +152,100 @@ export default function TechIndex() {
 
       {/* Decorative Bottom SVG */}
       <div className="absolute bottom-0 left-0 w-full z-0 pointer-events-none">
+=======
+      <div className="container relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-6 relative z-10"
+        >
+          <h2 className="text-3xl font-bold mb-4 text-black">
+            Improve and Innovate with the Tech Trends
+          </h2>
+          <p className="text-gray-800 max-w-2xl mx-auto">
+            We hire and build your own remote dedicated development teams tailored to your specific needs.
+          </p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-16 items-center mx-4">
+          {/* Skills Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            {skills.map((skill, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02 }}
+                className="group"
+              >
+                <div className="flex justify-between mb-2">
+                  <span className="text-black font-bold group-hover:text-red-600 transition-colors">
+                    {skill.name}
+                  </span>
+                </div>
+                <div className="h-2 bg-gray-400 rounded-full overflow-hidden">
+                  <motion.div
+                    className="h-full bg-[#00008b] rounded-full"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${skill.percentage}%` }}
+                    transition={{ duration: 1, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Philosophies Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="grid grid-cols-2 gap-6"
+          >
+            {philosophies.map((item, index) => (
+              <Link key={index} href={item.path}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  className="cursor-pointer  relative group overflow-hidden rounded-lg shadow-lg w-full h-60 sm:h-64 md:h-56"
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    layout="fill"
+                    objectFit="cover"
+                    className="transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* Fixed black overlay to match exact dimensions */}
+                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-300 z-10" />
+
+                  {/* Text content stays on top */}
+                  <div className="absolute bottom-0 z-20 w-full px-4 py-3  text-white bg-black/70 group-hover:bg-red-600 transition-all duration-300">
+                    <h3 className="text-[12px] sm:text-lg font-semibold">{item.title}</h3>
+                    <p className="text-sm mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {item.description}
+                    </p>
+                  </div>
+                </motion.div>
+              </Link>
+            ))}
+
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom Decorative Wave */}
+      <div className="absolute bottom-0 left-0 w-full z-0 pointer-events-none rotate-360">
+>>>>>>> b0cdf58 (Initial commit)
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1440 320"

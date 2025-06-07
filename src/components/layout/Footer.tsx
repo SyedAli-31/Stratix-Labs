@@ -74,15 +74,18 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <div className="flex items-center space-x-2 ml-10">
+              <Link href="/" className="flex items-center space-x-2">
                 <Image
-                  src="/logo.png"
+                  src="/op.png"
                   alt="Stratix Labs Logo"
-                  width={80}
-                  height={96}
-                  className="w-20 h-24 object-contain"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 object-contain"
                 />
-              </div>
+                <span className="font-sans font-semibold text-[26px] tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#a6afea] to-[#7785ee]">
+                  Stratix Labs
+                </span>
+              </Link>
               <p className="text-gray-400 mb-4">
                 Transforming brands through innovative marketing strategies and
                 premium creative solutions.
@@ -122,7 +125,7 @@ const Footer = () => {
                 <li><Link href="/" className="text-gray-400 hover:text-gold transition-colors">Home</Link></li>
                 <li><Link href="/about" className="text-gray-400 hover:text-gold transition-colors">About Us</Link></li>
                 <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Services</Link></li>
-                <li><Link href="/testimonials" className="text-gray-400 hover:text-gold transition-colors">Testimonials</Link></li>
+               
                 <li><Link href="/contact" className="text-gray-400 hover:text-gold transition-colors">Contact</Link></li>
                 <li><Link href="/privacy-policy" className="text-gray-400 hover:text-gold transition-colors">Privacy Policy</Link></li>
               </ul>
@@ -132,12 +135,12 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">Our Services</h3>
               <ul className="space-y-2">
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Digital Marketing</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Brand Strategy</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Content Creation</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Social Media Management</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">SEO Optimization</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Web Development</Link></li>
+                <li><Link href="/service/digital-marketing" className="text-gray-400 hover:text-gold transition-colors">Digital Marketing</Link></li>
+                <li><Link href="/service/brand-strategy" className="text-gray-400 hover:text-gold transition-colors">Brand Strategy</Link></li>
+                <li><Link href="/service/content-creation" className="text-gray-400 hover:text-gold transition-colors">Content Creation</Link></li>
+                <li><Link href="/service/social-media-management" className="text-gray-400 hover:text-gold transition-colors">Social Media Management</Link></li>
+                <li><Link href="/service/seo-optimization" className="text-gray-400 hover:text-gold transition-colors">SEO Optimization</Link></li>
+                <li><Link href="/service/web-development" className="text-gray-400 hover:text-gold transition-colors">Web Development</Link></li>
               </ul>
             </div>
 

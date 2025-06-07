@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Lightbulb, Target, Rocket, Globe } from "lucide-react";
 import CTABanner from "@/components/home/CTABanner";
+
 const visionItems = [
   {
     icon: Lightbulb,
@@ -42,9 +43,7 @@ const visionItems = [
 export default function Vision() {
   return (
     <section className="relative z-0 min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0e0c2f] via-[#140e44] to-[#1c1a56] overflow-hidden">
-      {/* 🔮 Glowing Background Lights */}
-      <div className="absolute top-[-150px] left-[-100px] w-[500px] h-[500px] bg-purple-700 opacity-20 blur-3xl rounded-full z-0"></div>
-      <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-indigo-600 opacity-20 blur-3xl rounded-full z-0"></div>
+     
 
       <div className="relative z-10 container mx-auto">
         {/* 🔥 Heading */}
@@ -58,64 +57,75 @@ export default function Vision() {
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
             Our Vision
           </h1>
-          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
+          <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg">
             &ldquo;We envision a future where every business, regardless of size, has access to
             world-class digital solutions that drive growth and innovation.&rdquo;
           </p>
         </motion.div>
 
         {/* 💥 Vision Cards */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {visionItems.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05, rotateX: 4, rotateY: 4 }}
+              whileHover={{ scale: 1.05 }}
               className="transform-gpu"
             >
-              <Card className="bg-gradient-to-br from-purple-900 to-indigo-900 border border-purple-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30 transition-all duration-300 rounded-2xl">
-                <CardContent className="p-6 min-h-[240px] flex flex-col justify-between">
+              <Card className="h-full bg-white border border-gray-200 hover:border-pink-400 shadow-lg hover:shadow-pink-300/30 transition-all duration-300 rounded-2xl">
+                <CardContent className="p-6 min-h-[340px] flex flex-col justify-between">
+                  {/* Icon */}
+                  <div className="w-14 h-14 bg-red-600/10 rounded-full flex items-center justify-center mb-4">
+                    <item.icon className="w-10 h-10 text-red-600" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+                    {item.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-700 text-sm sm:text-base mb-4">
+                    {item.description}
+                  </p>
+
                   <motion.div
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.1 }}
-                    className="w-16 h-16 bg-red-600/10 rounded-full flex items-center justify-center mb-4"
+                    className="mt-auto"
+
                   >
-                    <item.icon className="w-12 h-12 text-red-600" />
+                    <button
+                      className="text-pink-600 font-semibold text-sm hover:underline focus:outline-none"
+                      onClick={() => alert(item.moreDetails)} // Replace with modal or accordion logic
+                    >
+                      Learn More
+                    </button>
+                    <p className="text-gray-600 text-xs sm:text-sm mt-2">
+                      {item.moreDetails}
+                    </p>
                   </motion.div>
-                  <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
-                  <p className="text-gray-300 mb-4">{item.description}</p>
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="text-pink-500 font-semibold text-sm mt-4"
-                  >
-                    Learn More
-                  </motion.div>
-                  <div className="text-gray-400 text-sm mt-2">{item.moreDetails}</div>
+
                 </CardContent>
               </Card>
             </motion.div>
           ))}
         </div>
 
-        {/* Vision Quote Section */}
+        {/* CTA Banner */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-20"
         >
-          {/* Placeholder for any additional content you want to add */}
+          <CTABanner
+            heading="Ready to Elevate Your Brand?"
+            subheading="Schedule a consultation with our experts to discuss how our services can be tailored to your specific needs."
+            buttonText="Book a Free Strategy Call"
+          />
         </motion.div>
-
-        <CTABanner
-          heading="Ready to Elevate Your Brand?"
-          subheading="Schedule a consultation with our experts to discuss how our services can be tailored to your specific needs."
-          buttonText="Book a Free Strategy Call"
-        />
       </div>
     </section>
   );

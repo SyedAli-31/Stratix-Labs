@@ -50,7 +50,7 @@ const strategies = [
 
 export default function Strategy() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0e0c2f] via-[#140e44] to-[#1c1a56] py-10 ">
+    <section className="relative z-0 min-h-screen py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#0e0c2f] via-[#140e44] to-[#1c1a56] overflow-hidden">
       <div className="container mx-auto px-4 mt-10 ">
         {/* Page Header */}
         <motion.div
@@ -68,7 +68,8 @@ export default function Strategy() {
         </motion.div>
 
         {/* Grid Layout */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Strategy Grid Layout */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {strategies.map((strategy, index) => (
             <motion.div
               key={index}
@@ -76,30 +77,41 @@ export default function Strategy() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05, rotateX: 4, rotateY: 4 }}
+              whileHover={{ scale: 1.05 }}
               className="transform-gpu"
             >
-              <Card className="bg-gradient-to-br from-purple-900 to-indigo-900 border border-purple-700 hover:border-pink-500 shadow-lg hover:shadow-pink-500/30 transition-all duration-300 p-6 rounded-2xl">
-                <div className="relative mb-4 flex justify-center">
-                  <div className="w-16 h-16 bg-red-600/20 rounded-full flex items-center justify-center">
-                    <strategy.icon className="w-10 h-10 text-red-600" />
+              <Card className="h-full bg-white border border-gray-200 hover:border-pink-400 shadow-md hover:shadow-pink-200/40 transition-all duration-300 rounded-2xl">
+                <CardContent className="flex flex-col justify-between p-6 min-h-[360px] sm:min-h-[380px] lg:min-h-[400px]">
+                  <div className="flex flex-col items-center mb-4">
+                    <div className="w-16 h-16 bg-red-600/20 rounded-full flex items-center justify-center mb-3">
+                      <strategy.icon className="w-9 h-9 text-red-600" />
+                    </div>
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-center text-gray-900">
+                      {strategy.title}
+                    </h3>
+                    <p className="text-gray-700 text-sm sm:text-base mt-1 text-center">
+                      Key focus areas for effective {strategy.title.toLowerCase()}
+                    </p>
                   </div>
-                </div>
-                <CardContent>
-                  <h3 className="text-xl font-bold text-white mb-4">{strategy.title}</h3>
-                  <div className="space-y-2 text-gray-300 text-sm">
+
+                  <div className="space-y-2 text-sm sm:text-base text-gray-700">
                     {strategy.steps.map((step, stepIndex) => (
-                      <div key={stepIndex} className="flex items-center justify-center gap-2">
-                        <ArrowRight className="w-4 h-4 text-red-600" />
+                      <div
+                        key={stepIndex}
+                        className="flex items-start gap-2"
+                      >
+                        <ArrowRight className="w-4 h-4 text-red-600 mt-1" />
                         <span>{step}</span>
                       </div>
                     ))}
                   </div>
                 </CardContent>
+
               </Card>
             </motion.div>
           ))}
         </div>
+
 
         {/* Learn More Button */}
         <motion.div
@@ -118,6 +130,7 @@ export default function Strategy() {
           buttonText="Book a Free Strategy Call"
         />
       </div>
-    </div>
+    
+    </section >
   );
 }

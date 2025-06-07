@@ -28,7 +28,8 @@ const steps = [
 export default function ContactSection() {
   return (
     <section className="py-24 flex justify-center bg-black/10">
-      <div className="container px-6 md:px-12 lg:px-16">
+      <div className="container px-4 md:px-8 lg:px-16">
+        {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +45,8 @@ export default function ContactSection() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16 relative">
+        {/* Step Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
           {steps.map((step, index) => (
             <motion.div
               key={index}
@@ -52,30 +54,19 @@ export default function ContactSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="relative"
             >
-              <div className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-10 hidden md:block">
-                {index < steps.length - 1 && (
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '2rem' }}
-                    transition={{ delay: index * 0.2 + 0.3 }}
-                    viewport={{ once: true }}
-                    className="h-0.5 bg-primary"
-                  />
-                )}
-              </div>
-
-              <div className="bg-white p-6 rounded-lg border border-border group hover:border-primary transition-all duration-300 shadow-md">
+              <div className="bg-white p-5 md:p-6 lg:p-8 rounded-xl border border-border group hover:border-primary transition-all duration-300 shadow-md flex flex-col h-full">
                 <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 rounded-full p-4">
+                  <div className="bg-primary/10 rounded-full p-3 shrink-0">
                     <step.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <div>
-                    <div className="text-xl font-bold text-primary mb-2 group-hover:text-primary transition-colors">
+                  <div className="flex flex-col justify-center">
+                    <h3 className="text-base md:text-lg font-semibold text-primary mb-1 group-hover:text-primary transition-colors leading-snug">
                       {step.title}
-                    </div>
-                    <p className="text-black">{step.description}</p>
+                    </h3>
+                    <p className="text-sm text-black leading-normal">
+                      {step.description}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -83,6 +74,7 @@ export default function ContactSection() {
           ))}
         </div>
 
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
