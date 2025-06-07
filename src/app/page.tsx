@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 // import TrustBadges from "@/components/home/Trustbadges";
 import ContactSection from "@/components/home/ContactSection";
 import Hero from "@/components/home/Hero";
-import Statistics from "@/components/home/Statistics";
+
 import TechIndex from "@/components/home/TechIndex";
 import Testimonials from "@/components/home/Testimonials";
 import LazyServices from '@/components/lazy/Lazyservices';
@@ -61,7 +61,7 @@ const Page = () => {
        
         <TechIndex />
         
-        <Statistics />
+       
         <Testimonials />
         <ContactSection />
       </main>

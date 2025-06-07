@@ -1,6 +1,3 @@
-
-
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -11,41 +8,8 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const testimonials = [
-  
   {
     id: 1,
-<<<<<<< HEAD
-    name: "Sarah Johnson",
-    position: "CMO, TechVision Inc.",
-    image: "/sarah.png",
-    quote: "Stratix lab transformed our brand presence completely. Their strategic approach and creative execution resulted in a 40% increase in our market share within just 6 months. The team is innovative, responsive, and truly committed to our success.",
-    rating: 5
-  },
-  {
-    id: 2,
-    name: "David Wilson",
-    position: "CEO, GlobalRetail",
-    image: "/david-wilson.png",
-    quote: "Working with Stratix lab has been game-changing for our business. Their digital marketing strategy tripled our online conversions while significantly reducing our cost per acquisition. I'm continually impressed by their data-driven approach and creative solutions.",
-    rating: 5
-  },
-  {
-    id: 3,
-    name: "Jennifer Lee",
-    position: "Marketing Director, InnovateCorp",
-    image: "/jennifer.png",
-    quote: "The team at Stratix lab doesn't just execute campaigns they become true partners in your business growth. Their deep understanding of our industry and target audience has led to campaigns that consistently outperform our expectations.",
-    rating: 5
-  },
-  {
-    id: 4,
-    name: "Michael Rodriguez",
-    position: "Founder, StartupSuccess",
-    image: "/michael.png",
-    quote: "As a startup, we needed a marketing partner who could maximize our limited budget while helping us stand out in a crowded market. Stratix lab delivered beyond our expectations, helping us secure our Series A funding largely based on the brand presence they created for us.",
-    rating: 5
-  }
-=======
     name: "Sarah Khan",
     position: "Marketing Head, Al-Madina Foods",
     image: "/sarah.jpeg",
@@ -80,11 +44,7 @@ const testimonials = [
       "Their attention to detail and proactive communication made our collaboration smooth and effective. Highly recommend Stratix Lab!",
     rating: 4,
   },
- 
->>>>>>> b0cdf58 (Initial commit)
 ];
-  
-
 
 const Testimonials = () => {
   const [isMounted, setIsMounted] = useState(false);

@@ -10,57 +10,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 // Import icons
-
-import { FiChevronDown, FiArrowRight } from "react-icons/fi";
-import {
-  SiAdobe, SiAmazon, SiGoogle, SiMeta, SiSlack
-} from "react-icons/si";
-
-// Utility functions
-const debounce = <T extends (...args: unknown[]) => void>(
-  func: T,
-  wait: number
-): ((...args: Parameters<T>) => void) => {
-  let timeout: ReturnType<typeof setTimeout> | null = null;
-
-  return function executedFunction(...args: Parameters<T>): void {
-    const later = () => {
-      if (timeout !== null) {
-        clearTimeout(timeout);
-        timeout = null;
-      }
-      func(...args);
-    };
-
-    if (timeout !== null) {
-      clearTimeout(timeout);
-    }
-    timeout = setTimeout(later, wait);
-  };
-};
-
-
-interface ExtendedNavigator extends Navigator {
-  deviceMemory?: number;
-}
-
-const isLowEndDevice = (): boolean => {
-  const nav = navigator as ExtendedNavigator;
-  return (
-    typeof navigator !== 'undefined' &&
-    (
-      (nav.deviceMemory !== undefined && nav.deviceMemory < 4) ||
-      (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency < 4)
-    )
-  );
-};
-
-
-
 import {  FiArrowRight } from "react-icons/fi";
 
 // Type definitions
-b0cdf58 (Initial commit)
 interface FloatingObjectProps {
   children: React.ReactNode;
   initialX?: number;
@@ -84,51 +36,6 @@ const FloatingObject: React.FC<FloatingObjectProps> = ({
   animationDelay = 0,
   className = ""
 }) => {
-
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef(null);
-
-useEffect(() => {
-  const element = elementRef.current;
-  if (!element) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      setIsVisible(entry.isIntersecting);
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(element);
-
-  return () => {
-    if (element) {
-      observer.unobserve(element);
-    }
-  };
-}, []);
-
-  // Simplified animation for low-end devices
-  const animationConfig = useMemo(() => {
-    const isLow = isLowEndDevice();
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-    return {
-      duration: isLow || isMobile ? 8 : 12,
-      ease: "easeInOut",
-      delay: animationDelay,
-      // Reduce movement range for low-end devices
-      x: isLow || isMobile
-        ? [initialX, initialX + 10, initialX - 5, initialX]
-        : [initialX, initialX + 20, initialX - 10, initialX],
-      y: isLow || isMobile
-        ? [initialY, initialY - 8, initialY + 5, initialY]
-        : [initialY, initialY - 15, initialY + 10, initialY],
-    };
-  }, [initialX, initialY, animationDelay]);
-
-
-
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
@@ -153,42 +60,6 @@ useEffect(() => {
 
 // GlowingOrb component for background effects
 const GlowingOrb: React.FC<GlowingOrbProps> = ({ className, size, color, delay = 0 }) => {
-
-  const [isVisible, setIsVisible] = useState(false);
-  const orbRef = useRef(null);
-
- useEffect(() => {
-  const orb = orbRef.current;
-  if (!orb) return;
-
-  const observer = new IntersectionObserver(
-    ([entry]) => {
-      setIsVisible(entry.isIntersecting);
-    },
-    { threshold: 0.1 }
-  );
-
-  observer.observe(orb);
-
-  return () => {
-    if (orb) {
-      observer.unobserve(orb);
-    }
-  };
-}, []);
-
-  // Simplified animation for mobile
-  const animationConfig = useMemo(() => {
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-    return {
-      duration: isMobile ? 6 : 8,
-      scale: isMobile ? [1, 1.1, 1] : [1, 1.2, 1],
-      opacity: isMobile ? [0.15, 0.3, 0.15] : [0.2, 0.4, 0.2],
-    };
-  }, []);
-
-
   return (
     <motion.div
       className={`rounded-full blur-3xl opacity-30 absolute ${className}`}
@@ -231,22 +102,9 @@ const Hero: React.FC = () => {
   useEffect(() => {
     setIsMounted(true);
 
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', debouncedCheckMobile);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const handleMouseMove = (e: MouseEvent): void => {
-
     // Add cursor glow effect
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
-
       const cursor = document.querySelector('.cursor-glow');
       if (cursor) {
         (cursor as HTMLElement).setAttribute(
@@ -256,37 +114,14 @@ const Hero: React.FC = () => {
       }
     };
 
-
-    // Type-safe debounce with unknown args signature
-    const debouncedHandleMouseMove: (...args: unknown[]) => void = debounce(
-      handleMouseMove as (...args: unknown[]) => void,
-      10
-    );
-
-    if (!isMobile) {
-      window.addEventListener('mousemove', debouncedHandleMouseMove);
-    }
-
-    return () => {
-      if (!isMobile) {
-        window.removeEventListener('mousemove', debouncedHandleMouseMove);
-      }
-
     window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-
     };
   }, []);
 
-
- 
-
-
-
   const staggerDelay = 0.2;
-
 
   return (
     <section
@@ -476,10 +311,7 @@ const Hero: React.FC = () => {
   );
 };
 
-
 export default Hero;
-
-
 
 // Enhanced background particles - adjust parameters to work with slim version
 const HeroBackground = ({
@@ -578,4 +410,3 @@ const HeroBackground = ({
     </div>
   );
 };
-
