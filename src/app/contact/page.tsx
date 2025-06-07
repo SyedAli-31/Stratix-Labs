@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Contact from "@/components/home/Contact";
 
 
-import Statistics from "@/components/home/Statistics";
+
 
 export default function ContactPage() {
   return (
@@ -47,7 +47,7 @@ export default function ContactPage() {
             
           </motion.div>
           <div className="mt-10">
-          <Statistics/>
+        
           </div>
         </div>
         
