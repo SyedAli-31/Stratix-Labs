@@ -12,7 +12,7 @@ import {
   Send,
 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const WEB3FORMS_ACCESS_KEY = "b0479c74-c682-4bca-b0df-cca21cc766e9";
 
@@ -26,11 +26,7 @@ const Footer = () => {
 
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [year, setYear] = useState<number | null>(null);
-
-  useEffect(() => {
-    setYear(new Date().getFullYear());
-  }, []);
+  const currentYear = new Date().getFullYear(); // ✅ fix for hydration
 
   const handleSubscribe = async () => {
     if (!email) {
@@ -69,7 +65,7 @@ const Footer = () => {
   return (
     <>
       <Toaster position="top-right" />
-      <footer className="bg-black text-white py-12">
+       <div className="bg-black text-white py-12">
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
@@ -91,30 +87,33 @@ const Footer = () => {
                 premium creative solutions.
               </p>
               <div className="flex space-x-4">
-              <Link href="/" className="text-gray-400 hover:text-gold transition-colors">
-  <Twitter size={20} />
-</Link>
-<Link
-  href="https://www.facebook.com/profile.php?id=61575081911392&mibextid=ZbWKwL"
-  className="text-gray-400 hover:text-gold transition-colors"
-  target="_blank"
->
-  <Facebook size={20} />
-</Link>
-<Link
-  href="https://www.linkedin.com/company/106972398/admin/dashboard/"
-  className="text-gray-400 hover:text-gold transition-colors"
-  target="_blank"
->
-  <Linkedin size={20} />
-</Link>
-<Link
-  href="https://www.instagram.com/stratixlabs_27/"
-  className="text-gray-400 hover:text-gold transition-colors"
-  target="_blank"
->
-  <Instagram size={20} />
-</Link>
+                <Link
+                  href="/"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                >
+                  <Twitter size={20} />
+                </Link>
+                <Link
+                  href="https://www.facebook.com/profile.php?id=61575081911392&mibextid=ZbWKwL"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
+                  <Facebook size={20} />
+                </Link>
+                <Link
+                  href="https://www.linkedin.com/company/106972398/admin/dashboard/"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
+                  <Linkedin size={20} />
+                </Link>
+                <Link
+                  href="https://www.instagram.com/stratixlabs_27/"
+                  className="text-gray-400 hover:text-gold transition-colors"
+                  target="_blank"
+                >
+                  <Instagram size={20} />
+                </Link>
               </div>
             </div>
 
@@ -122,12 +121,46 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
               <ul className="space-y-2">
-                <li><Link href="/" className="text-gray-400 hover:text-gold transition-colors">Home</Link></li>
-                <li><Link href="/about" className="text-gray-400 hover:text-gold transition-colors">About Us</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-gold transition-colors">Services</Link></li>
-               
-                <li><Link href="/contact" className="text-gray-400 hover:text-gold transition-colors">Contact</Link></li>
-                <li><Link href="/privacy-policy" className="text-gray-400 hover:text-gold transition-colors">Privacy Policy</Link></li>
+                <li>
+                  <Link
+                    href="/"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/about"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/services"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/contact"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/privacy-policy"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -135,12 +168,54 @@ const Footer = () => {
             <div>
               <h3 className="font-semibold text-lg mb-4">Our Services</h3>
               <ul className="space-y-2">
-                <li><Link href="/service/digital-marketing" className="text-gray-400 hover:text-gold transition-colors">Digital Marketing</Link></li>
-                <li><Link href="/service/brand-strategy" className="text-gray-400 hover:text-gold transition-colors">Brand Strategy</Link></li>
-                <li><Link href="/service/content-creation" className="text-gray-400 hover:text-gold transition-colors">Content Creation</Link></li>
-                <li><Link href="/service/social-media-management" className="text-gray-400 hover:text-gold transition-colors">Social Media Management</Link></li>
-                <li><Link href="/service/seo-optimization" className="text-gray-400 hover:text-gold transition-colors">SEO Optimization</Link></li>
-                <li><Link href="/service/web-development" className="text-gray-400 hover:text-gold transition-colors">Web Development</Link></li>
+                <li>
+                  <Link
+                    href="/service/digital-marketing"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Digital Marketing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/service/brand-strategy"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Brand Strategy
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/service/content-creation"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Content Creation
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/service/social-media-management"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Social Media Management
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/service/seo-optimization"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    SEO Optimization
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/service/web-development"
+                    className="text-gray-400 hover:text-gold transition-colors"
+                  >
+                    Web Development
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -179,7 +254,7 @@ const Footer = () => {
 
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {year ?? ""} Stratix Labs. All rights reserved.
+              &copy; {currentYear} Stratix Labs. All rights reserved.
             </p>
             <Button
               variant="outline"
@@ -191,7 +266,7 @@ const Footer = () => {
             </Button>
           </div>
         </div>
-      </footer>
+      </div>
     </>
   );
 };

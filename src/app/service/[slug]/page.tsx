@@ -17,11 +17,11 @@ interface Service {
 }
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 const ServiceDetailPage = ({ params }: Props) => {
-  const { slug } = use(params);
+  const { slug } = (params);
   const service = otherServices.find((s: Service) => s.slug === slug);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(0);
