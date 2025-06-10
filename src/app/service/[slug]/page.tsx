@@ -377,15 +377,17 @@ const ServiceDetailPage = ({ params }: Props) => {
               className="bg-white hover:bg-blue-50 text-blue-900 font-semibold rounded-full px-8 py-6 shadow-xl hover:shadow-blue-300/30 transition-all duration-300 text-base"
             >
               <Rocket className="mr-3 h-5 w-5" />
-              Launch Your Success Now
+           <Link href={"/about"}>
+                   Launch Your Success Now</Link>
             </Button>
 
             <Button
               variant="outline"
               size="lg"
               className="border-white/30 text-white hover:bg-white/10 font-medium rounded-full px-8 py-6 transition-all duration-300 text-base"
-            >
-              Schedule a Strategy Call
+            ><Link href={"/contact"}>
+                Schedule a Strategy Call</Link>
+
             </Button>
           </div>
         </motion.div>

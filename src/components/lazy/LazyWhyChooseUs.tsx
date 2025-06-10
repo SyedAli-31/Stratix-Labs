@@ -7,9 +7,6 @@ import React from "react";
 const features = [
   "Happy customers and 95% repeat business.",
   "Strong focus on quality assurance throughout the process.",
-  "We have been in business since 2005.",
-  "Over 350 staff.",
-  "ISO 9001 and ISO 27001 certified company.",
   "Seamless communication and collaboration with clients.",
   "Software engineers who understand western work ethic.",
 ];

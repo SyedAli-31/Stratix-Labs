@@ -76,7 +76,7 @@ const Footer = () => {
             <div>
               <Link href="/" className="flex items-center space-x-2">
                 <Image
-                  src="/op.png"
+                  src="/logo.png"
                   alt="Stratix Labs Logo"
                   width={40}
                   height={40}

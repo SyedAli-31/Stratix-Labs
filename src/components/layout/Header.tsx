@@ -54,7 +54,7 @@ const Header: React.FC = () => {
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "bg-blue-900/80 backdrop-blur-lg border-b border-blue-900 shadow-lg"
+          ? "bg-blue-900/20 backdrop-blur-lg border-b border-blue-900 shadow-lg"
           : "bg-[#1e293b] border-b border-blue-900 shadow-md"
       )}
     >
@@ -64,7 +64,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="/op.png"
+              src="/logo.png"
               alt="Stratix Labs Logo"
               width={40}
               height={40}

@@ -19,25 +19,25 @@ const philosophies = [
     title: "Our Mission",
     path: "/mission",
     description: "Empowering businesses through digital solutions",
-    image: "/mission.jpg",
+    image: "/mission.png",
   },
   {
     title: "Our Vision",
     path: "/vision",
     description: "Leading the future of digital innovation and transformation",
-    image: "/mobile.png",
+    image: "/vision.jpg",
   },
   {
     title: "Our Philosophy",
     path: "/philosophy",
     description: "Guided by principles that define who we are",
-    image: "/service.png",
+    image: "/philosophy.jpg",
   },
   {
     title: "Our Strategy",
     path: "/strategy",
     description: "Systematic approach to delivering excellence",
-    image: "/seo.webp",
+    image: "/strategy.png",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function TechIndex() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section className="relative py-28 flex justify-center bg-[#ffffff] overflow-hidden">
+    <section className="relative py-28 md:px-16 px-2 flex justify-center bg-[#ffffff] overflow-hidden">
       {/* Decorative SVG top wave */}
       <div className="absolute top-0 left-0 w-full z-0 pointer-events-none">
         <svg
@@ -111,7 +111,7 @@ export default function TechIndex() {
               </div>
 
               {/* Philosophies Section */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4 ">
                 {philosophies.map((item, index) => (
                   <Link key={index} href={item.path}>
                     <motion.div
@@ -129,9 +129,9 @@ export default function TechIndex() {
                         />
                         <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-300" />
                       </div>
-                      <div className="absolute bottom-0 w-full p-4 text-white bg-black/70 group-hover:bg-red-600 transition-all duration-300">
+                      <div className="absolute h-24 bottom-0 w-full p-4 text-white bg-black/70 group-hover:bg-red-600 transition-all duration-300">
                         <h3 className="text-lg font-semibold">{item.title}</h3>
-                        <p className="text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p className=" text-[12px] md:text-[14px]   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           {item.description}
                         </p>
                       </div>

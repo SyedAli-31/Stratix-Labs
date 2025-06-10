@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
   const [, setIsLoaded] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const { scrollYProgress } = useScroll();
-  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  
   const scrollScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.97]);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -179,7 +179,7 @@ const Hero: React.FC = () => {
       {/* Hero Content Container */}
       <motion.div
         className="z-10 max-w-7xl w-full px-4 sm:px-8 mx-auto"
-        style={{ opacity: scrollOpacity, scale: scrollScale }}
+        style={{ scale: scrollScale }}
       >
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center py-16 sm:py-24">
 
@@ -260,7 +260,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.8, delay: staggerDelay * 2 }}
             >
               <Link
-                href="#other-services"
+                href="#services"
                 className="group relative px-8 py-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-medium shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">

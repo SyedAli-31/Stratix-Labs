@@ -21,7 +21,7 @@ const services = [
     title: 'Brand Strategy',
     description:
       'Develop a compelling brand identity and positioning that resonates with your target audience and differentiates you from competitors.',
-    icon: <BarChart3 className="h-8 w-8" />,
+    icon: <BarChart3 className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-purple-600 to-purple-800',
   },
   {
@@ -30,7 +30,7 @@ const services = [
     title: 'Digital Marketing',
     description:
       'Comprehensive digital marketing campaigns that drive traffic, engagement, and conversions across multiple channels.',
-    icon: <Megaphone className="h-8 w-8" />,
+    icon: <Megaphone className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-amber-500 to-amber-700',
   },
   {
@@ -39,7 +39,7 @@ const services = [
     title: 'Content Creation',
     description:
       'High-quality, engaging content that tells your brand story and connects with your audience on an emotional level.',
-    icon: <PenTool className="h-8 w-8" />,
+    icon: <PenTool className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-blue-600 to-blue-800',
   },
   {
@@ -48,7 +48,7 @@ const services = [
     title: 'Social Media Management',
     description:
       'Strategic social media presence that builds community, increases engagement, and drives brand awareness.',
-    icon: <Instagram className="h-8 w-8" />,
+    icon: <Instagram className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-pink-600 to-pink-800',
   },
   {
@@ -57,7 +57,7 @@ const services = [
     title: 'SEO Optimization',
     description:
       'Improve your search engine rankings and drive organic traffic with our comprehensive SEO strategies.',
-    icon: <Search className="h-8 w-8" />,
+    icon: <Search className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-green-600 to-green-800',
   },
   {
@@ -66,65 +66,90 @@ const services = [
     title: 'Web Development',
     description:
       'Responsive, user-friendly websites that provide exceptional user experience and drive conversions.',
-    icon: <Code className="h-8 w-8" />,
+    icon: <Code className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8" />,
     color: 'from-cyan-600 to-cyan-800',
   },
 ];
 
 const Services = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+  const [ref, inView] = useInView({ 
+    triggerOnce: true, 
+    threshold: 0.1 
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { delayChildren: 0.3, staggerChildren: 0.1 },
+      transition: { 
+        delayChildren: 0.3, 
+        staggerChildren: 0.1 
+      },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.5 } },
+    hidden: { 
+      y: 20, 
+      opacity: 0 
+    },
+    visible: { 
+      y: 0, 
+      opacity: 1, 
+      transition: { 
+        duration: 0.5 
+      } 
+    },
   };
 
   return (
     <div
       id="services"
-      className="relative py-10 bg-blue-600 overflow-hidden"
+      className="relative py-12 sm:py-16 lg:py-20 xl:py-24 bg-blue-600 overflow-hidden"
       ref={ref}
     >
-      <div className="relative container mx-auto px-4 md:px-8 z-10">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 z-10 max-w-7xl">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
           variants={itemVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-500 via-white to-gray-300">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-500 via-white to-gray-300 leading-tight">
             Our Services
           </h1>
-          <p className="text-lg text-gray-200 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg lg:text-xl xl:text-2xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
             Discover our comprehensive range of marketing services designed to elevate your brand,
             engage your audience, and drive measurable results for your business.
           </p>
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-16 sm:mb-20"
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
           {services.map((service) => (
-            <motion.div key={service.id} variants={itemVariants}>
-              <Link href={`/service/${service.slug}`}>
-                <ServiceCard
-                  id={service.id}
-                  title={service.title}
-                  description={service.description}
-                  icon={service.icon}
-                  gradientColor={`bg-gradient-to-br ${service.color}`}
-                />
+            <motion.div
+              key={service.id}
+              variants={itemVariants}
+              className="flex justify-center"
+            >
+              <Link 
+                href={`/service/${service.slug}`} 
+                className="w-full max-w-sm block"
+              >
+                <div className="w-full h-full">
+                  <ServiceCard
+                    id={service.id}
+                    slug={service.slug}
+                    title={service.title}
+                    description={service.description}
+                    icon={service.icon}
+                    gradientColor={`bg-gradient-to-br ${service.color}`}
+                  />
+                </div>
               </Link>
             </motion.div>
           ))}

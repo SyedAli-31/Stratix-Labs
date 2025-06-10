@@ -22,7 +22,7 @@ const missionItems = [
     description: "Delivering solutions that drive business growth",
     icon: TrendingUp,
   },
-  {
+  { 
     title: "Quality Excellence",
     description: "Maintaining highest standards in every project",
     icon: ShieldCheck,
