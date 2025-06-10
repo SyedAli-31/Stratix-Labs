@@ -130,8 +130,8 @@ export default function TechIndex() {
                         <div className="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition-all duration-300" />
                       </div>
                       <div className="absolute h-24 bottom-0 w-full p-4 text-white bg-black/70 group-hover:bg-red-600 transition-all duration-300">
-                        <h3 className="text-lg font-semibold">{item.title}</h3>
-                        <p className=" text-[12px] md:text-[14px]   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <h3 className="text-[16px] font-semibold">{item.title}</h3>
+                        <p className=" text-[9px] md:text-[13px]   opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           {item.description}
                         </p>
                       </div>

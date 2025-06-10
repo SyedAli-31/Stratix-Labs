@@ -96,7 +96,7 @@ const ServiceCard = ({
 
           {/* Action Button */}
           <div className="mt-auto">
-            <div className="inline-flex items-center justify-center font-semibold text-white bg-gradient-to-r from-blue-700 to-blue-900 hover:from-purple-600 hover:to-blue-600 px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-3.5 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 text-sm sm:text-base lg:text-lg min-w-[140px] sm:min-w-[160px] group/button">
+            <div className="inline-flex items-center justify-center font-semibold text-white bg-gradient-to-r from-blue-700 to-blue-900 hover:from-purple-600 hover:to-blue-600 px-4 py-2.5 sm:px-5 sm:py-3 lg:px-2 lg:py-1.5 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 text-sm sm:text-base lg:text-lg min-w-[140px] sm:min-w-[160px] group/button">
               <span className="mr-2">Learn More</span>
               <motion.div variants={arrowVariants}>
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />

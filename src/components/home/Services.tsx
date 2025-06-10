@@ -108,7 +108,7 @@ const Services = () => {
       className="relative py-12 sm:py-16 lg:py-20 xl:py-24 bg-blue-600 overflow-hidden"
       ref={ref}
     >
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 z-10 max-w-7xl">
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-6 z-10 max-w-7xl">
         <motion.div
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
           variants={itemVariants}
