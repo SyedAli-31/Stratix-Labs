@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import {
   ArrowUp,
-  Twitter,
+  
   Facebook,
   Linkedin,
   Instagram,
@@ -87,12 +87,7 @@ const Footer = () => {
                 premium creative solutions.
               </p>
               <div className="flex space-x-4">
-                <Link
-                  href="/"
-                  className="text-gray-400 hover:text-gold transition-colors"
-                >
-                  <Twitter size={20} />
-                </Link>
+                
                 <Link
                   href="https://www.facebook.com/profile.php?id=61575081911392&mibextid=ZbWKwL"
                   className="text-gray-400 hover:text-gold transition-colors"
