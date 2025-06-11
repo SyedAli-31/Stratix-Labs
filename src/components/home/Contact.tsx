@@ -22,7 +22,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { MapPin, Mail, Phone, Loader2 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const WEB3FORMS_EMAIL = "osm78704@gmail.com";
+const WEB3FORMS_EMAIL = "contact@stratixlabs.com";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
