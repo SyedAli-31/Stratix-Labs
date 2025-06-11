@@ -9,8 +9,8 @@ import Hero from "@/components/home/Hero";
 
 import TechIndex from "@/components/home/TechIndex";
 import Testimonials from "@/components/home/Testimonials";
-import LazyServices from '@/components/lazy/Lazyservices';
 import LazyWhyChooseUs from '@/components/lazy/LazyWhyChooseUs';
+import Services from '@/components/home/Services';
 
 const Page = () => {
   // Smooth scrolling for in-page links
@@ -56,7 +56,7 @@ const Page = () => {
         <Hero />
         {/* <TrustBadges /> */}
        <LazyWhyChooseUs/>
-        <LazyServices/>
+        <Services/>
        
        
         <TechIndex />

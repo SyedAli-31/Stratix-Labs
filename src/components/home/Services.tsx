@@ -77,31 +77,9 @@ const Services = () => {
     threshold: 0.1 
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { 
-        delayChildren: 0.3, 
-        staggerChildren: 0.1 
-      },
-    },
-  };
+ 
 
-  const itemVariants = {
-    hidden: { 
-      y: 20, 
-      opacity: 0 
-    },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      transition: { 
-        duration: 0.5 
-      } 
-    },
-  };
-
+  ;
   return (
     <div
       id="services"
@@ -111,7 +89,7 @@ const Services = () => {
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-6 z-10 max-w-7xl">
         <motion.div
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 lg:mb-20"
-          variants={itemVariants}
+         
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
@@ -126,14 +104,14 @@ const Services = () => {
 
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-16 sm:mb-20"
-          variants={containerVariants}
+          
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
         >
           {services.map((service) => (
             <motion.div
               key={service.id}
-              variants={itemVariants}
+             
               className="flex justify-center"
             >
               <Link 

@@ -247,19 +247,29 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              &copy; {currentYear} Stratix Labs. All rights reserved.
-            </p>
-            <Button
-              variant="outline"
-              size="icon"
-              className="bg-gray-800 text-gold border-gold hover:bg-gold hover:text-gray-900"
-              onClick={handleScrollToTop}
-            >
-              <ArrowUp size={18} />
-            </Button>
-          </div>
+         <div className="border-t border-gray-800 mt-12 pt-8">
+  <div className="flex flex-col md:flex-row items-center justify-between">
+    {/* Centered Text */}
+    <div className="w-full text-center md:text-right md:w-2/3">
+      <span className="text-gray-400 text-sm">
+        &copy; {currentYear} Stratix Labs. All rights reserved.
+      </span>
+    </div>
+
+    {/* Arrow Button on the Right */}
+    <div className="w-full md:w-1/2 flex justify-center md:justify-end mt-4 md:mt-0">
+      <Button
+        variant="outline"
+        size="icon"
+        className="bg-gray-800 text-gold border-gold hover:bg-gold hover:text-gray-900"
+        onClick={handleScrollToTop}
+      >
+        <ArrowUp size={18} />
+      </Button>
+    </div>
+  </div>
+</div>
+
         </div>
       </div>
     </>

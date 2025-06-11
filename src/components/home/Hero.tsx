@@ -2,15 +2,19 @@
 
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import Particles from "react-tsparticles";
-// Change the import to match the same package as your Particles component uses
-import { loadSlim } from "tsparticles-slim"; // Stay with the original import from your code
-import type { Engine } from "tsparticles-engine"; // Keep consistent with the original
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
+import type { Engine } from "tsparticles-engine";
 
 // Import icons
 import {  FiArrowRight } from "react-icons/fi";
+
+// Proper dynamic imports
+const Particles = dynamic(() => import("react-tsparticles"), {
+  ssr: false,
+  loading: () => null
+});
 
 // Type definitions
 interface FloatingObjectProps {
@@ -19,6 +23,7 @@ interface FloatingObjectProps {
   initialY?: number;
   animationDelay?: number;
   className?: string;
+  id?: number;
 }
 
 interface GlowingOrbProps {
@@ -26,31 +31,33 @@ interface GlowingOrbProps {
   size: string;
   color: string;
   delay?: number;
+  id?: number;
 }
 
-// 3D Object Component for visual effects
+// Optimized 3D Object Component
 const FloatingObject: React.FC<FloatingObjectProps> = ({
   children,
   initialX = 0,
   initialY = 0,
   animationDelay = 0,
-  className = ""
+  className = "",
+  id = 0
 }) => {
   return (
     <motion.div
       className={`absolute pointer-events-none ${className}`}
       initial={{ x: initialX, y: initialY, opacity: 0 }}
       animate={{
-        x: [initialX, initialX + 20, initialX - 10, initialX],
-        y: [initialY, initialY - 15, initialY + 10, initialY],
+        x: [initialX, initialX + 10, initialX - 5, initialX],
+        y: [initialY, initialY - 8, initialY + 5, initialY],
         opacity: 1,
       }}
       transition={{
-        duration: 12,
+        duration: 8,
         repeat: Infinity,
         repeatType: "reverse",
-        ease: "easeInOut",
-        delay: animationDelay,
+        ease: "linear",
+        delay: animationDelay + (id * 0.05),
       }}
     >
       {children}
@@ -58,119 +65,145 @@ const FloatingObject: React.FC<FloatingObjectProps> = ({
   );
 };
 
-// GlowingOrb component for background effects
-const GlowingOrb: React.FC<GlowingOrbProps> = ({ className, size, color, delay = 0 }) => {
+// Optimized GlowingOrb component
+const GlowingOrb: React.FC<GlowingOrbProps> = ({ className, size, color, delay = 0, id = 0 }) => {
   return (
     <motion.div
-      className={`rounded-full blur-3xl opacity-30 absolute ${className}`}
+      className={`rounded-full blur-2xl opacity-20 absolute ${className}`}
       style={{
         background: color,
         width: size,
         height: size,
       }}
+      initial={{ opacity: 0, scale: 0.9 }}
       animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.2, 0.4, 0.2],
+        scale: [0.9, 1, 0.9],
+        opacity: [0.1, 0.2, 0.1],
       }}
       transition={{
-        duration: 8,
+        duration: 6,
         repeat: Infinity,
-        delay,
+        delay: delay + (id * 0.05),
+        ease: "linear"
       }}
     />
   );
 };
 
-// Galaxy Spiral Component - Exact match to the image
-
-
 const Hero: React.FC = () => {
-  const [, setIsLoaded] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [showParticles, setShowParticles] = useState<boolean>(false);
+  const [ , setParticlesLoaded] = useState<boolean>(false);
   const { scrollYProgress } = useScroll();
   
   const scrollScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.97]);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Handle particles initialization with slim version as in original code
+  // Fixed particles initialization
   const particlesInit = useCallback(async (engine: Engine): Promise<void> => {
-    // Use loadSlim instead of loadFull to match your imports
-    await loadSlim(engine);
-    setIsLoaded(true);
+    try {
+      // Dynamic import inside the callback
+      const { loadSlim } = await import("tsparticles-slim");
+      await loadSlim(engine);
+      setParticlesLoaded(true);
+    } catch (error) {
+      console.error("Failed to load particles:", error);
+    }
   }, []);
 
   useEffect(() => {
+    // Mount immediately for content
     setIsMounted(true);
 
-    // Add cursor glow effect
+    // Show particles after page is loaded and idle
+    const showParticlesTimer = setTimeout(() => {
+      if (document.readyState === 'complete') {
+        // Wait for next idle period
+        if (window.requestIdleCallback) {
+          window.requestIdleCallback(() => {
+            setShowParticles(true);
+          }, { timeout: 2000 });
+        } else {
+          // Fallback for browsers without requestIdleCallback
+          setTimeout(() => setShowParticles(true), 1500);
+        }
+      } else {
+        // If document is still loading, wait for load event
+        const handleLoad = () => {
+          setTimeout(() => setShowParticles(true), 1000);
+        };
+        window.addEventListener('load', handleLoad, { once: true });
+        return () => window.removeEventListener('load', handleLoad);
+      }
+    }, 800);
+
+    // Optimized cursor effect
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const cursor = document.querySelector('.cursor-glow');
       if (cursor) {
-        (cursor as HTMLElement).setAttribute(
-          'style',
-          `top: ${e.clientY - 200}px; left: ${e.clientX - 200}px; opacity: 1`
-        );
+        (cursor as HTMLElement).style.transform = `translate(${e.clientX - 150}px, ${e.clientY - 150}px)`;
+        (cursor as HTMLElement).style.opacity = '0.8';
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    // Use passive listeners for better performance
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
     return () => {
+      clearTimeout(showParticlesTimer);
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 
-  const staggerDelay = 0.2;
+  const staggerDelay = 0.4;
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center text-white bg-[#030014] overflow-hidden"
     >
-      {/* Custom cursor glow effect */}
-      <div className="cursor-glow fixed w-[400px] h-[400px] rounded-full bg-gradient-to-r from-purple-600/30 to-blue-500/30 blur-[80px] pointer-events-none opacity-0 transition-opacity duration-500" />
+      {/* Optimized cursor glow */}
+      <div className="cursor-glow fixed w-[300px] h-[300px] rounded-full bg-gradient-to-r from-purple-600/15 to-blue-500/15 blur-[50px] pointer-events-none opacity-0 transition-opacity duration-300 will-change-transform" />
 
       {/* Background Elements */}
       <div className="absolute inset-0 z-0">
-        {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-radial from-[#0a0a1a] via-[#070718] to-[#030014] opacity-90" />
+        {/* Static background gradient */}
+        <div className="absolute inset-0 bg-gradient-radial from-[#0a0a1a] via-[#070718] to-[#030014]" />
 
-        {/* Enhanced particle effects */}
-        <HeroBackground particlesInit={particlesInit} />
+        {/* Lazy loaded particles */}
+        {showParticles && (
+          <HeroBackground particlesInit={particlesInit} />
+        )}
 
-        {/* Glowing orbs for atmosphere */}
+        {/* Optimized glowing orbs */}
         <GlowingOrb
+          id={0}
           className="-top-[10%] -right-[5%]"
-          size="40rem"
-          color="linear-gradient(120deg, rgba(99, 102, 241, 0.3), rgba(168, 85, 247, 0.3))"
+          size="30rem"
+          color="linear-gradient(120deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.15))"
         />
         <GlowingOrb
+          id={1}
           className="-bottom-[15%] -left-[10%]"
-          size="45rem"
-          color="linear-gradient(120deg, rgba(59, 130, 246, 0.2), rgba(236, 72, 153, 0.2))"
-          delay={2}
+          size="35rem"
+          color="linear-gradient(120deg, rgba(59, 130, 246, 0.1), rgba(236, 72, 153, 0.1))"
+          delay={0.5}
         />
       </div>
 
-      {/* 3D Elements */}
+      {/* Reduced 3D Elements */}
       <AnimatePresence>
         {isMounted && (
           <>
-            <FloatingObject initialX={-200} initialY={-150} animationDelay={1.5} className="left-[10%] top-[20%]">
-              <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl opacity-40" />
+            <FloatingObject id={0} initialX={-150} initialY={-100} animationDelay={0.5} className="left-[10%] top-[20%]">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg opacity-25" />
             </FloatingObject>
-            <FloatingObject initialX={100} initialY={50} animationDelay={0.8} className="right-[15%] top-[15%]">
-              <div className="w-24 h-24 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full opacity-30" />
+            <FloatingObject id={1} initialX={80} initialY={30} animationDelay={0.3} className="right-[15%] top-[15%]">
+              <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full opacity-20" />
             </FloatingObject>
-            <FloatingObject initialX={-50} initialY={100} animationDelay={2.3} className="left-[20%] bottom-[20%]">
-              <div className="w-14 h-14 border-2 border-purple-400 rounded-full opacity-30" />
-            </FloatingObject>
-            <FloatingObject initialX={150} initialY={-80} animationDelay={1.2} className="right-[10%] bottom-[30%]">
-              <div className="w-32 h-8 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-lg opacity-20 rotate-12" />
-            </FloatingObject>
-            <FloatingObject initialX={-30} initialY={-30} animationDelay={2} className="right-[30%] bottom-[15%]">
-              <div className="w-12 h-12 border border-blue-300 rounded-md opacity-40 rotate-45" />
+            <FloatingObject id={2} initialX={-30} initialY={60} animationDelay={0.8} className="left-[20%] bottom-[20%]">
+              <div className="w-8 h-8 border border-purple-400 rounded-full opacity-20" />
             </FloatingObject>
           </>
         )}
@@ -183,14 +216,14 @@ const Hero: React.FC = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-center py-16 sm:py-24">
 
-          {/* Text Content - Takes 3 columns on large screens */}
-          <div className="lg:col-span-3 space-y-10 text-center lg:text-left">
+          {/* Text Content */}
+          <div className="lg:col-span-3 space-y-6 text-center lg:text-left">
 
-            {/* Animated Badge */}
+            {/* Fast loading badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.3 }}
               className="inline-block"
             >
               <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-sm text-blue-300 font-medium border border-blue-500/30 backdrop-blur-sm">
@@ -202,19 +235,19 @@ const Hero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Main Heading with advanced styling */}
-            <div className="space-y-4">
+            {/* Optimized Main Heading */}
+            <div className="space-y-3">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 0.4 }}
                 className="overflow-hidden"
               >
                 <motion.h1
                   className="text-5xl sm:text-6xl md:text-7xl font-bold leading-tight"
-                  initial={{ y: 100 }}
+                  initial={{ y: 30 }}
                   animate={{ y: 0 }}
-                  transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+                  transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
                 >
                   <span className="inline-block">We Build</span>{" "}
                   <span className="inline-block relative mt-1">
@@ -222,10 +255,10 @@ const Hero: React.FC = () => {
                       Brands
                     </span>
                     <motion.span
-                      className="absolute -bottom-1.5 left-0 w-full h-[10px] bg-gradient-to-r from-yellow-500/60 to-yellow-500/0"
+                      className="absolute -bottom-1.5 left-0 w-full h-[6px] bg-gradient-to-r from-yellow-500/50 to-yellow-500/0"
                       initial={{ width: 0 }}
                       animate={{ width: "100%" }}
-                      transition={{ delay: 1.5, duration: 1.2, ease: "easeOut" }}
+                      transition={{ delay: 0.8, duration: 0.6, ease: "easeOut" }}
                     />
                   </span>{" "}
                   <span className="md:block">
@@ -236,9 +269,9 @@ const Hero: React.FC = () => {
 
               <motion.p
                 className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: staggerDelay }}
+                transition={{ duration: 0.4, delay: staggerDelay }}
               >
                 At <span className="text-white font-semibold relative">
                   Stratix Labs
@@ -246,22 +279,22 @@ const Hero: React.FC = () => {
                     className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-blue-500 to-purple-500"
                     initial={{ width: 0 }}
                     animate={{ width: "100%" }}
-                    transition={{ delay: 2, duration: 0.8 }}
+                    transition={{ delay: 1, duration: 0.5 }}
                   />
                 </span>, We craft bold, transformative digital experiences powered by strategy, innovation, and design. From startups to enterprises, we turn visions into reality by shaping brands that resonate.
               </motion.p>
             </div>
 
-            {/* CTA Buttons with enhanced styling */}
+            {/* Fast loading CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-6 sm:items-center justify-center lg:justify-start pt-4"
-              initial={{ opacity: 0, y: 20 }}
+              className="flex flex-col sm:flex-row gap-4 sm:items-center justify-center lg:justify-start pt-2"
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: staggerDelay * 2 }}
+              transition={{ duration: 0.4, delay: staggerDelay * 2 }}
             >
               <Link
                 href="#services"
-                className="group relative px-8 py-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-medium shadow-lg shadow-indigo-500/30 hover:shadow-xl hover:shadow-indigo-500/40 transition-all duration-300"
+                className="group relative px-8 py-4 rounded-full overflow-hidden bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-medium shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/35 transition-all duration-300"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   Explore Services
@@ -271,56 +304,69 @@ const Hero: React.FC = () => {
                   className="absolute inset-0 bg-gradient-to-r from-blue-700 to-indigo-700"
                   initial={{ x: "100%" }}
                   whileHover={{ x: 0 }}
-                  transition={{ duration: 0.4 }}
+                  transition={{ duration: 0.3 }}
                 />
               </Link>
 
               <Link
                 href="/contact"
-                className="group relative px-8 py-3.5 rounded-full border border-white/30 text-white font-medium hover:text-black hover:bg-white  transition-all duration-300"
+                className="group relative px-8 py-3.5 rounded-full border border-white/30 text-white font-medium hover:text-black hover:bg-white transition-all duration-300"
               >
-                <span className="relative z-10 flex items-center  justify-center gap-2">
+                <span className="relative z-10 flex items-center justify-center gap-2">
                   Let&apos;s Talk
                 </span>
                 <motion.span
                   className="absolute inset-0 rounded-full bg-white"
                   initial={{ scale: 0 }}
                   whileHover={{ scale: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                 />
               </Link>
             </motion.div>
           </div>
 
+          {/* Priority Image for LCP */}
           <div className="lg:col-span-2 flex justify-center">
-            <Image
-              src="/her.png" // Replace with actual path
-              alt="Hero Visual"
-              width={600} // Adjust width as needed
-              height={600} // Adjust height as needed
-              className="rounded-2xl shadow-xl object-cover"
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
+              <Image
+                src="/her.png"
+                alt="Hero Visual"
+                width={600}
+                height={600}
+                className="rounded-2xl shadow-xl object-cover"
+                priority
+                quality={85}
+                placeholder="blur"
+                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              />
+            </motion.div>
           </div>
         </div>
-
-
       </motion.div>
-
-
     </section>
   );
 };
 
 export default Hero;
 
-// Enhanced background particles - adjust parameters to work with slim version
+// Optimized background particles component
 const HeroBackground = ({
   particlesInit,
 }: {
   particlesInit: (engine: Engine) => Promise<void>;
 }) => {
   return (
-    <div className="absolute inset-0 z-0">
+    <motion.div 
+      className="absolute inset-0 z-0"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.5 }}
+    >
+       <div className="absolute inset-0 z-0">
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -408,5 +454,7 @@ const HeroBackground = ({
         }}
       />
     </div>
+ 
+    </motion.div>
   );
 };
