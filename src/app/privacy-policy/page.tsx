@@ -84,7 +84,7 @@ const PrivacyPolicy = () => {
             <p className="text-base md:text-lg text-muted-foreground mt-4">
               To exercise these rights, contact us at{' '}
               <a href="mailto:contact@stratixlabs.com" className="text-yellow-600  hover:text-accent-foreground">
-                contact@stratixlabs.com
+                stratixlabs@gmail.com
               </a>.
             </p>
           </section>
@@ -105,7 +105,7 @@ const PrivacyPolicy = () => {
               <strong>Stratix Labs</strong>
             </p>
             <p className="text-base md:text-lg text-muted-foreground mt-2">
-              Email: <a href="mailto:contact@stratixlabs.com" className="text-yellow-600 hover:text-accent-foreground">contact@stratixlabs.com</a>
+              Email: <a href="mailto:contact@stratixlabs.com" className="text-yellow-600 hover:text-accent-foreground">stratixlabs@gmail.com</a>
             </p>
             <p className="text-base md:text-lg text-muted-foreground mt-2">
               Phone: <strong>+123 456 7890</strong>
